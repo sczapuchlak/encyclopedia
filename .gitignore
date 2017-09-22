@@ -184,3 +184,5 @@ Temporary Items
 
 ./vscode/*
 
+#API secrets (jen)
+config.py
