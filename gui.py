@@ -1,1 +1,0 @@
-#this file will contain the gui for the encyclopedia program
