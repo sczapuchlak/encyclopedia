@@ -2,8 +2,53 @@
 <html>
     <head>
         <base href="/" />
+        <!---We can change the title of the site later... just needed something for the time being!--->
+        <title>Py-splore the Web with PyInEx!</title>
+
+        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
     </head>
     <body>
-        <h1>Hello world!</h1>
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pulls-right">
+                        <!--  found this site, for nav dropdowns .... https://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp!-->
+                        <li role="presentation" class="active"><a href="#">Home</a> </li>
+                        <li role="presentation"><a href="#">Sign In</a> </li>
+                        <li role="presentation"><a href="showSignUp">Sign Up</a> </li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">PyInEx Image Scraper </h3>
+            </div>
+
+            <div class="jumbotron">
+                <h1> Explore the Web , with PyInEx Image Scraper!</h1>
+                <p class="lead"></p>
+                <p><a class="btn btn-lg btn success" href="showSignUp" role="button">Sign Up Today</a> </p>
+            </div>
+
+            <div class=" row aboutTheCompany">
+                <div class="col-lg-6">
+                  <h3> Now you can find your favorite images and information all in one place!</h3>
+                    <p> With PyInEx, we take your favorite social media platforms and information services
+                        and make it easier to find what you're looking for on the internet! It's as simple
+                        as typing in the keyword of what you're looking for, and choosing the site you'd like
+                        to scour. Within seconds your image will appear on the screen for you to drool over!
+                    </p>
+                </div>
+
+                <div class="col-lg-6">
+                    <p> 
+                        <img src="images/social_media.jpg">
+                    </p>
+                </div>
+            </div>
+            <footer class="footer">
+                <p> &copy; PyInEx 2017 </p>
+            </footer>
+        </div>
     </body>
 </html>
