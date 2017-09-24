@@ -1,20 +1,24 @@
-#  --------------------------------------------------------------------------
-# Performs a basic keyword search for tweets containing a specific word
-# ---------------------------------------------------------------------------
+# Import package to process data
+# try: import json
+# except ImportError:
+#     import simplejson as json
 
+# Import methods from twitter library
 from twitter import *
+from config import keys
 
 
 # Load API Credentials
+ACCESS_KEY = keys.access_key
+ACCESS_SECRET = keys.access_secret
+CONSUMER_KEY = keys.consumer_key
+CONSUMER_SECRET = keys.consumer_secret
 
-config = exec(open("config.py").read())
+oauth = OAuth(ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
+# Initiate connection to Twitter API
 
-# -----------------------------------------------------------------------
-# create twitter API object
-# -----------------------------------------------------------------------
-twitter = Twitter(auth=OAuth(config["access_key"], config["access_secret"], config["consumer_key"], config["consumer_secret"]))
-
+twitter = Twitter(auth=oauth)
 
 # -----------------------------------------------------------------------
 # perform a basic search
@@ -22,24 +26,24 @@ twitter = Twitter(auth=OAuth(config["access_key"], config["access_secret"], conf
 # https://dev.twitter.com/rest/reference/get/search/tweets
 # -----------------------------------------------------------------------
 
-results = twitter.search.tweets(raw_query="q=twitter%20&result_type=recent&since=2014-07-19&count=100")
+def search(word):
 
-# query = twitter.search.tweets(q = "lazy dog")
+    # search with query term and return 5
 
-# -----------------------------------------------------------------------
-# How long did this query take?
-# -----------------------------------------------------------------------
-# print ("Search complete (%.3f seconds)" % (query["search_metadata"]["completed_in"])
+    query = twitter.search.tweets(q=word, count=5)
 
+    return query
 # -----------------------------------------------------------------------
 # Loop through each of the results, and print its content.
 # -----------------------------------------------------------------------
+
+testString = "cats"
+
+results = search(testString)
+
 # for result in results["statuses"]:
-# print ("(%s) @%s %s" % (results["created_at"], results["user"]["screen_name"], results["text"]))
-
-# search = input("Insert your keyword here:")
+#     print("(%s) @%s %s" % (results["created_at"], results["user"]["screen_name"], results["text"]))
 
 
-# print(results)
-
+print(results)
 
