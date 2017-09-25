@@ -1,13 +1,14 @@
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+    padding-top:1.5%;
+    padding-bottom: 40px;
 }
 #footer p{
     text-align: center;
-  align-content: center;
+
 }
-nav{
-  float: right;
+.jumbotron{
+    background: linear-gradient(#96d4ff, #12d0ff);
+    padding-top: 13%;
 }
 .form-signin {
   max-width: 330px;
@@ -44,3 +45,34 @@ nav{
   border-top-right-radius: 0;
 
 }
+.button {
+   border-top: 1px solid #96d1f8;
+   background: #105c8f;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3fcfd4), to(#105c8f));
+   background: -webkit-linear-gradient(top, #3fcfd4, #105c8f);
+   background: -moz-linear-gradient(top, #3fcfd4, #105c8f);
+   background: -ms-linear-gradient(top, #3fcfd4, #105c8f);
+   background: -o-linear-gradient(top, #3fcfd4, #105c8f);
+   padding: 9px 18px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 17px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #2c6496;
+   background: #2c6496;
+   color: #f7f2f7;
+   }
+.button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
