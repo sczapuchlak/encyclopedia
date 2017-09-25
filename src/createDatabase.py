@@ -7,7 +7,18 @@ def create_DB():
     print("Connection to " + sqlFile + " success!")
     curs = conn.cursor()
 
-    curs.execute('CREATE TABLE Users'
-                 '(UserID INT PRIMARY KEY autoincrement,'
+    try:
+        curs.execute('CREATE TABLE Users'
+                 '(UserID INTEGER PRIMARY KEY AUTOINCREMENT ,'
                  'Username TEXT NOT NULL,'
-                 'Password TEXT NOT NULL)')
+                 'Password TEXT NOT NULL);')
+
+        print("Table 'Users' Created Successfully!")
+
+    except(sqlite3.OperationalError):
+        print("Table already exists")
+
+def main():
+    create_DB()
+
+main()
