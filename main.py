@@ -1,4 +1,5 @@
 import os
+from src import createDatabase
 from flask import Flask, render_template, request, session, redirect, url_for
 app = Flask(__name__, '/', '/')
 
@@ -27,6 +28,9 @@ def search(term, services):
     #placeholder to ping the apis
     return render_template('index.html')
 @app.route('/signup', methods=['get', 'post'])
+
+#check if the database is made, if not then create one.
+
 def sign_up():
     'Sign up a new user'
     if request.method == 'POST':
