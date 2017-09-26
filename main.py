@@ -4,10 +4,12 @@ app = Flask(__name__, '/', '/')
 
 @app.route('/')
 @app.route('/index.html')
+@app.route('/index', methods=['get'])
 def index():
     'Main template route'
     return render_template('index.html')
 @app.route('/login', methods=['post', 'get'])
+@app.route('/login.html', methods=['get'])
 def auth():
     'Authentication endpoint'
     if request.method == 'POST':
@@ -27,6 +29,7 @@ def search(term, services):
     #placeholder to ping the apis
     return render_template('index.html')
 @app.route('/signup', methods=['get', 'post'])
+@app.route('/signup.html', methods=['get'])
 def sign_up():
     'Sign up a new user'
     if request.method == 'POST':
