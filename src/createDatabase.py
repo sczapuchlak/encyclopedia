@@ -10,6 +10,8 @@ def create_DB():
     try:
         curs.execute('CREATE TABLE Users'
                  '(UserID INTEGER PRIMARY KEY AUTOINCREMENT ,'
+                 'FirstName TEXT NOT NULL,'
+                 'LastName TEXT NOT NULL,'
                  'Username TEXT NOT NULL,'
                  'Password TEXT NOT NULL);')
 
