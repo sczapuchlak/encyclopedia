@@ -1,18 +1,88 @@
-<html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <base href="/" />
+        <!---We can change the title of the site later... just needed something for the time being!-->
+        <title>Py-splore the Web with PyInEx!</title>
+
+   <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="../static/css/style.css" type= "text/css" rel= "stylesheet">
+         <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 
     </head>
-    <body>
-        <form id="login" action="/auth" method="post">
-            <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" />
+     <body style=";text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
+                        font-size: 13pt">
+
+         <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav button" style="float: right; padding-top:25px ">
+                        <!--  found this site, for nav dropdowns .... https://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp!-->
+                        <li role="presentation" class="active " style="padding-right:50px;"><a href="index.html">Home </a></li>
+                        <li role="presentation" style="padding-right:50px"><a href="#">Sign In </a> </li>
+                    <li role="presentation"><a href="signup.html">Sign Up </a> </li>
+                    </ul>
+                </nav>
+
+                <a><img src="https://thumbs.imgbox.com/9f/47/vPTpX89m_t.png" alt="media_Cheetah_SM" style="height: 90px;padding-bottom: 15pt" align="left"/></a></br></br></br>
+
+
+            <div class="jumbotron"
+                 style=" background: #757F9A;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right,  #1a2980, #26d0ce);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #1a2980, #26d0ce); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */; padding-top: 13%;
+            text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);color: whitesmoke">
+                <h1><center style="font-weight:300; font-size: 38pt"> Find your favorite images and information all in one convenient place!</center></h1>
+            </br></br>
+                <h3><center> Explore the Web with Media Cheetah! </center></h3>
+                </br>
+
+
             </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" />
+
+        <div class=" row aboutTheCompany">
+            <div class="col-lg-4">
+
+
+         <img src="https://i.imgur.com/A72TPTs.gif" alt="Social Media"  style="width:350px;height: 200px;padding-left: 7%">
             </div>
-            <button type="submit"></button>
-        </form>
-    </body>
+
+            <div class="col-lg-4">
+
+                <form id="login" action="/auth" method="post" style="text-align: center; border: black">
+                    <fieldset>
+                       <h1>Please Sign In</h1></br>
+                        <label for="username" style="font-size: 16pt">Username:</label>
+                        <input type="text" id="username" name="username" />
+                        </br>
+
+                        <label for="password" style="font-size: 16pt">Password  : </label>
+                        <input type="password" id="password" name="password " />
+                        </br></br>
+
+                        <button type="submit"style=" font-size: 16pt ">Sign In</button>
+                    </fieldset>
+                </form>
+                </div>
+            <div class="col-lg-4">
+
+
+         <img src="https://media.giphy.com/media/LZHt0BmSkLLtS/giphy.gif" alt="Social Media"  style="width:350px;height: 200px;padding-left: 7%">
+            </div>
+
+
+                <footer class="footer" style="text-align: center; background: whitesmoke;padding-top:10%;">
+                <p> &copy; Media Cheetah 2017 </p>
+                </footer>
+      </div>
+            </div>
+</div>
+ </body>
 </html>
+
+
