@@ -14,7 +14,7 @@ class Database():
                  '(UserID INTEGER PRIMARY KEY AUTOINCREMENT ,'
                  'FirstName TEXT NOT NULL,'
                  'LastName TEXT NOT NULL,'
-                 'Username TEXT NOT NULL,'
+                 'UserName TEXT NOT NULL,'
                  'Password TEXT NOT NULL);')
 
             print("Table 'Users' Created Successfully!")
@@ -22,7 +22,14 @@ class Database():
         except(sqlite3.OperationalError):
             print("Table already exists")
 
+    #gets user information based on the username
+    def get_user(self, username):
+        self.curs.execute('SELECT * FROM Users WHERE Username = (?)', (username))
+
+    #add_user method that takes in information name, username, and password to add a user to the Table Users
     def add_user(self, name, username, password):
-        self.curs.execute('INSERT INTO Users (UserName, Password) VALUES(?,?,?)', (name, username, password))
+        firstName,lastName = name.split(" ")
+
+        self.curs.execute('INSERT INTO Users (FirstName, LastName, UserName, Password) VALUES(?,?,?,?)', (firstName, lastName, username, password))
         self.conn.commit()
         self.conn.close()
