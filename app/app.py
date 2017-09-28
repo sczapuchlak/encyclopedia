@@ -1,5 +1,5 @@
 '''main entrypoint for the application'''
-import os
+import time
 from src.database import Database
 from src.twitterAPI import Requestor
 from flask import Flask, render_template, request, session
@@ -11,11 +11,9 @@ app.secret_key = 'rubber baby buggy bumbers'
 @app.route('/index', methods=['get'])
 def index():
     'Main template route'
-    try:
-        session['username']
+    if check_for_user():
         return render_template('home.html')
-    except:
-        return render_template('index.html')
+    return render_template('index.html')
 @app.route('/login', methods=['post', 'get'])
 @app.route('/login.html', methods=['get'])
 def auth():
@@ -29,9 +27,11 @@ def auth():
         #placeholder to validate password here
         #user_manager = UserManager()
         if True: #user_manager.validate_password(username, password)
-            return render_template('index.html')
+            return render_template('home.html')
         return render_template('login.html', error_text="Invalid username or password")
     else:
+        if check_for_user():
+            return render_template('home.html')
         return render_template('login.html')
 @app.route('/search', methods=['post'])
 def search():
@@ -49,7 +49,9 @@ def search():
 @app.route('/home.html')
 def home():
     '''search form'''
-    return render_template('home.html', results=list())
+    if check_for_user()
+        return render_template('home.html', results=list())
+    return render_template('index.html')
 @app.route('/signup', methods=['get', 'post'])
 @app.route('/signup.html', methods=['get'])
 def sign_up():
@@ -69,3 +71,31 @@ def sign_up():
         return render_template('home.html')
     else:
         return render_template('signup.html')
+
+def check_for_user():
+    '''check if a user has logged in, refresh the expiration
+    if logged in, auto logout after 30 minutes of inactivity
+    '''
+    try:
+        # will throw a KeyError if it doesn't exist
+        _ = session['username']
+        #will throw a ValueError if not a number
+        expiration = float(session['expiration'])
+        #get the current time in seconds
+        current = time.time()
+        #if the login has expired
+        if current > expiration:
+            #remove the user from the session
+            session['username'] = None
+            expiration = None
+            return False
+        else:
+            #refresh the expiration to be 30 minutes from now
+            session['expiration'] = current + (30 * 60)
+            return True
+    except KeyError:
+        #if the username or expiration is not in the session
+        return False
+    except ValueError:
+        #if the expiration is not a valid float
+        return False
