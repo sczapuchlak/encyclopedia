@@ -4,7 +4,7 @@ from src.database import Database
 from src.twitterAPI import Requestor
 from src.login import UserManager
 from flask import Flask, render_template, request, session
-app = Flask(__name__, '/', '/')
+app = Flask(__name__, '/static')
 app.secret_key = 'rubber baby buggy bumbers'
 
 @app.route('/')
