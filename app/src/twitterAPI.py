@@ -1,18 +1,16 @@
 '''Requesting HTTP Resources'''
 from twitter import Twitter, OAuth
-from config import keys
+from os import environ
 
 class Requestor():
     '''General HTTP Requestor'''
     def __init__(self):
         '''Load API Credentials'''
-        self.ACCESS_KEY = keys.access_key
-        self.ACCESS_KEY = keys.access_key
-        self.ACCESS_SECRET = keys.access_secret
-        self.CONSUMER_KEY = keys.consumer_key
-        self.CONSUMER_SECRET = keys.consumer_secret
+
         # Load API Credentials
-        self.oauth = OAuth(self.ACCESS_KEY, self.ACCESS_SECRET, self.CONSUMER_KEY, self.CONSUMER_SECRET)
+        self.oauth = OAuth(environ.get('twitter_access_key'),\
+        environ.get('twitter_access_secret'), environ.get('twitter_consumer_key'),\
+        environ.get('twitter_consumer_secret'))
         # Initiate connection to Twitter API
         self.twitter = Twitter(auth=self.oauth)
     def search_twitter(self, word):

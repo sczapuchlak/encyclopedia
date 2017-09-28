@@ -1,8 +1,10 @@
 '''main entrypoint for the application'''
 import os
-from src import database
-from flask import Flask, render_template, request, session, redirect, url_for
+from src.database import Database
+from src.twitterAPI import Requestor
+from flask import Flask, render_template, request, session
 app = Flask(__name__, '/', '/')
+app.secret_key = 'rubber baby buggy bumbers'
 
 @app.route('/')
 @app.route('/index.html')
@@ -39,6 +41,7 @@ def search():
     requestor = Requestor()
     if 'Twitter' in services:
         results = requestor.search_twitter(term)
+        print(results)
         return render_template('home.html', results=results)
     #placeholder to ping the apis
     return render_template('home.html', results=list())
