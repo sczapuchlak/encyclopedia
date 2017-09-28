@@ -11,13 +11,22 @@ class Database():
         print("Connection to " + self.sql_file + " success!")
         self.curs = self.conn.cursor()
         try:
+            #Users Table
             self.curs.execute('CREATE TABLE Users'
                  '(UserID INTEGER PRIMARY KEY AUTOINCREMENT ,'
                  'FirstName TEXT NOT NULL,'
                  'LastName TEXT NOT NULL,'
                  'UserName TEXT NOT NULL,'
                  'Password TEXT NOT NULL);')
+
+            #UserSearch Table
+            self.curs.execute('CREATE TABLE UserSearch'
+                              '(SearchID INTEGER PRIMARY KEY AUTOINCREMENT,'
+                              'SearchText TEXT NOT NULL,'
+                              'UserID TEXT NOT NULL,'
+                              'FOREIGN KEY(UserID) REFERENCES Users(UserID))')
             print("Table 'Users' Created Successfully!")
+
         except(sqlite3.OperationalError):
             print("Table already exists")
     def get_user(self, username):
