@@ -1,8 +1,7 @@
 '''main entrypoint for the application'''
 from flask import Flask, render_template, request, session
-
+from src.twitterAPI import Requestor
 app = Flask(__name__)
-
 @app.route('/')
 @app.route('/index.html')
 @app.route('/index', methods=['get'])
@@ -35,10 +34,10 @@ def search():
     'Route to search'
     term = request.form.get('term', None)
     services = request.form.getlist('services', None)
-
-    # if twitter:
-        #results = API.search_twitter(term)
-        #return render_template('home.html, results=results)
+    requestor = Requestor()
+    if 'Twitter' in services:
+        results = requestor.search_twitter(term)
+        return render_template('home.html', results=results)
     #placeholder to ping the apis
     return render_template('home.html', results=list())
 @app.route('/home')
