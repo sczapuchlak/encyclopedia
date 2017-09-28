@@ -2,6 +2,7 @@
 import time
 from src.database import Database
 from src.twitterAPI import Requestor
+from src.login import UserManager
 from flask import Flask, render_template, request, session
 app = Flask(__name__, '/', '/')
 app.secret_key = 'rubber baby buggy bumbers'
@@ -19,14 +20,12 @@ def index():
 def auth():
     'Authentication endpoint'
     if request.method == 'POST':
-        try:
-            username = request.form.get('username',None)
-            password = request.form.get('password', None)
-        except Exception as e:
-            print('error getting values from from', e)
-        #placeholder to validate password here
-        #user_manager = UserManager()
-        if True: #user_manager.validate_password(username, password)
+        username = request.form.get('username', None)
+        password = request.form.get('password', None)
+        user_manager = UserManager()
+        if user_manager.validate_credentials(username, password):
+            session['username'] = username
+            session['expiration'] = time.time() + (30 * 60)
             return render_template('home.html')
         return render_template('login.html', error_text="Invalid username or password")
     else:
@@ -49,7 +48,7 @@ def search():
 @app.route('/home.html')
 def home():
     '''search form'''
-    if check_for_user()
+    if check_for_user():
         return render_template('home.html', results=list())
     return render_template('index.html')
 @app.route('/signup', methods=['get', 'post'])
@@ -61,17 +60,16 @@ def sign_up():
         password = request.form.get('password')
         first_name = request.form.get('first-name')
         last_name = request.form.get('last-name')
-        print(username, password, first_name, last_name)
-        user_manager = None
-        #try:
-            #user_manager.add_user(username, password, first_name, last_name)
-            #session['user'] = username
-        #except Exception as e:
-            #return render_template('signup.html', error_text="Unable to create user")
+        print(first_name, last_name, username, password)
+        user_manager = UserManager()
+        try:
+            user_manager.add_user(first_name, last_name, username, password)
+            session['user'] = username
+        except Exception as e:
+            return render_template('signup.html', error_text="Unable to create user")
         return render_template('home.html')
     else:
         return render_template('signup.html')
-
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
     if logged in, auto logout after 30 minutes of inactivity
@@ -99,3 +97,6 @@ def check_for_user():
     except ValueError:
         #if the expiration is not a valid float
         return False
+
+if __name__ == '__main__':
+    app.run()
