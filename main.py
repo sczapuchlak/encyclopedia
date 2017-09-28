@@ -1,7 +1,9 @@
 '''main entrypoint for the application'''
-from flask import Flask, render_template, request, session
-from src.twitterAPI import Requestor
-app = Flask(__name__)
+import os
+from src import database
+from flask import Flask, render_template, request, session, redirect, url_for
+app = Flask(__name__, '/', '/')
+
 @app.route('/')
 @app.route('/index.html')
 @app.route('/index', methods=['get'])
