@@ -1,11 +1,15 @@
 '''main entrypoint for the application'''
 import time
+from os import environ
 from src.database import Database
 from src.twitterAPI import Requestor
 from src.login import UserManager
 from flask import Flask, render_template, request, session
 app = Flask(__name__, '/static')
 app.secret_key = 'rubber baby buggy bumbers'
+app.config['DEBUG'] = environ.get('env') != 'PROD'
+app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
+
 
 @app.route('/')
 @app.route('/index.html')
