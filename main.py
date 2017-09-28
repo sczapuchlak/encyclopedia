@@ -1,5 +1,5 @@
-import os
-from flask import Flask, render_template, request, session, redirect, url_for
+'''main entrypoint for the application'''
+from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__, '/', '/')
 
 @app.route('/')
@@ -17,8 +17,7 @@ def auth():
         if True:
             session['username'] = username
             return render_template('index.html')
-        else:
-            return render_template('login.html')
+        return render_template('login.html')
     else:
         return render_template('login.html')
 @app.route('/search', methods=['post'])
