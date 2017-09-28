@@ -1,74 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <base href="/" />
-        <!---We can change the title of the site later... just needed something for the time being!-->
-        <title>Prowl the Web with Media Cheetah</title>
-
-   <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-         <link href="../static/css/style.css" type= "text/css" rel= "stylesheet">
-         <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
-        <style>
-
-        </style>
-
-    </head>
-     <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
+<head>
+    <base href="/" />
+    <!---We can change the title of the site later... just needed something for the time being!-->
+    <title>Prowl the Web with Media Cheetah</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+<body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
-
-        <div class="container">
-            <div class="header" style="background-image: url('https://i.pinimg.com/236x/3d/62/e2/3d62e27177613772d6efa1a5693c2e4d--leopard-print-wallpaper-leopard-spots.jpg');opacity: .8;border:2px solid blanchedalmond;">
-                <nav>
-                    <ul class="nav button" style="float: right; padding-top:25px ">
+    <div class="container">
+            <div class="header" style="background-image: url('https://i.pinimg.com/236x/3d/62/e2/3d62e27177613772d6efa1a5693c2e4d--leopard-print-wallpaper-leopard-spots.jpg');opacity: .8;border:2px solid blanchedalmond;height:70px">
+                <nav style="display: flex;flex-flow:row;justify-content:space-between;">
+                    <a><img src="https://thumbs.imgbox.com/9f/47/vPTpX89m_t.png" alt="media_Cheetah_SM" style="height: 95px;padding-bottom: 15pt" align="left"/></a></br>
+                    <ul class="nav " style="display:flex;flex-flow:row;justify-content:flex-end;width:500px;height:50px;">
                         <!--  found this site, for nav dropdowns .... https://www.w3schools.com/bootstrap/bootstrap_dropdowns.asp!-->
-                        <li role="presentation" style="padding-right:50px;"><a href="index.html">Home</a> </li>
-                        <li role="presentation" style="padding-right:50px"><a href="login.html">Sign In </a> </li>
-                    <li role="presentation" class="active "><a href="#" style="padding-right: 4pt">Sign Up </a> </li>
+                        <li role="presentation" class="active " style="padding-right:50px;"><a href="index.html">Home </a></li>
+                        <li role="presentation" style="padding-right:50px"><a href="#">Sign In </a> </li>
+                        <li role="presentation" style="padding-right: 4pt"><a href="signup.html">Sign Up </a> </li>
                     </ul>
                 </nav>
-
-                <a><img src="https://thumbs.imgbox.com/9f/47/vPTpX89m_t.png" alt="media_Cheetah_SM" style="height: 93px;padding-bottom: 15pt" align="left"/></a></br></br></br>
+                </br>
+                </br>
+            </br>
             </div>
-
-            <div class="jumbotron"
-                 style=" background: #757F9A;  /* fallback for old browsers */
+        <div class="jumbotron" style=" background: #757F9A;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to right,  #1a2980, #26d0ce);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #1a2980, #26d0ce); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */; padding-top: 13%;
             text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);color: whitesmoke">
-                <h1><center style="font-weight:300; font-size: 38pt"> Find your favorite images and information all in one convenient place!</center></h1>
-            </br></br>
-                <h3><center> Explore the Web with Media Cheetah! </center></h3>
-                </br>
-
-
-            </div>
-
-            <div class="jumbotron">
-        <h1>Media Cheetah Sign Up</h1>
-        <form class="form-signin">
-
-        <label for="inputName" class="sr-only"> First Name</label></br>
-        <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
-
-        <label for="inputUserName" class="sr-only"> Username</label></br>
-        <input type="username" name="inputUserName" id="inputUserName" class="form-control" placeholder="Username" required autofocus>
-
-        <label for="inputEmail" class="sr-only">Email address</label></br>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-
-        <label for="inputPassword" class="sr-only">Password</label></br>
-        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-        </br>
-        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button" >Sign up</button>
-      </form>
-      </div>
-
-            </div>
-           <footer class="footer" style="text-align: center; background: whitesmoke;padding-top:.5%">
-                <p> &copy; Media Cheetah 2017 </p>
-            </footer>
+            <h1>
+                <center style="font-weight:300; font-size: 38pt"> Find your favorite images and information all in one convenient place!</center>
+            </h1>
+            </br>
+            </br>
+            <h3>
+                <center> Explore the Web with Media Cheetah! </center>
+            </h3>
+            </br>
         </div>
-    </body>
+        <div class="jumbotron">
+            <h1>Media Cheetah Sign Up</h1>
+            <form class="form-signin" action="/signup" method="post">
+                <label for="first-name" class="sr-only"> First Name</label></br>
+                <input type="text" name="first-name" id="first-name" class="form-control" placeholder="First Name" required autofocus>
+                <lable for="last-name" class="sr-only">Last Name</lable></br>
+                <input type="text" name="last-name" id="last-name" class="form-control" placeholder="Last Name" required autofocus>
+                <label for="inputUserName" class="sr-only"> Username</label></br>
+                <input type="username" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+                <label for="inputEmail" class="sr-only">Email address</label></br>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label></br>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                </br>
+                <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+                <span style="color:red">{{error_text}}</span>
+            </form>
+        </div>
+    </div>
+    <footer class="footer" style="text-align: center; background: whitesmoke;padding-top:.5%">
+        <p> &copy; Media Cheetah 2017 </p>
+    </footer>
+    </div>
+</body>
 </html>
