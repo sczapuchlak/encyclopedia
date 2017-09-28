@@ -7,43 +7,54 @@
 from twitter import *
 from config import keys
 
+class Requestor():
 
-# Load API Credentials
-ACCESS_KEY = keys.access_key
-ACCESS_SECRET = keys.access_secret
-CONSUMER_KEY = keys.consumer_key
-CONSUMER_SECRET = keys.consumer_secret
+    def __init__(self):
 
-oauth = OAuth(ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+        # Load API Credentials
 
-# Initiate connection to Twitter API
+        self.ACCESS_KEY = keys.access_key
+        self.ACCESS_KEY = keys.access_key
+        self.ACCESS_SECRET = keys.access_secret
+        self.CONSUMER_KEY = keys.consumer_key
+        self.CONSUMER_SECRET = keys.consumer_secret
 
-twitter = Twitter(auth=oauth)
+        # Load API Credentials
+        self.oauth = OAuth(self.ACCESS_KEY, self.ACCESS_SECRET, self.CONSUMER_KEY, self.CONSUMER_SECRET)
 
-# -----------------------------------------------------------------------
-# perform a basic search
-# Twitter API docs:
-# https://dev.twitter.com/rest/reference/get/search/tweets
-# -----------------------------------------------------------------------
+        # Initiate connection to Twitter API
+        self.twitter = Twitter(auth=self.oauth)
 
-def search(word):
+def searchTwitter(self, word):
 
-    # search with query term and return 5
+    # A Tweet will be made for each response in searchTwitter(self,word)
+    # Tweets will be added to a list and returned
 
-    query = twitter.search.tweets(q=word, count=5)
+    # -----------------------------------------------------------------------
+    # Make outbound request to Twitter & perform a basic search
+    # Twitter API docs:
+    # https://dev.twitter.com/rest/reference/get/search/tweets
+    # -----------------------------------------------------------------------
 
-    return query
-# -----------------------------------------------------------------------
-# Loop through each of the results, and print its content.
-# -----------------------------------------------------------------------
+    # Search tweets for 'word' and return 5
+    query = self.twitter.search.tweets(q=word, count=5)
 
-testString = "cats"
+    listOfTweets = []
 
-results = search(testString)
+    # Loop through each of the results, add each status to list
+    # https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
+    # -----------------------------------------------------------------------
+    for result in query["statuses"]:
 
-# for result in results["statuses"]:
-#     print("(%s) @%s %s" % (results["created_at"], results["user"]["screen_name"], results["text"]))
+        # print("(%s) @%s %s" % (result["created_at"], result["user"]["screen_name"], result["text"]))
+        tweet = result
+        listOfTweets.append(tweet)
+
+    return listOfTweets
 
 
-print(results)
-
+# Testing that everything works as expected...
+# requestor = Requestor()
+# testString = "cat"
+# newlist = searchTwitter(requestor, testString)
+# print(newlist)
