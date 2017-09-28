@@ -21,10 +21,10 @@ class Database():
 
             #UserSearch Table
             self.curs.execute('CREATE TABLE UserSearch'
-                              '(SearchID INTEGER PRIMARY KEY AUTOINCREMENT,'
-                              'SearchText TEXT NOT NULL,'
-                              'UserID TEXT NOT NULL,'
-                              'FOREIGN KEY(UserID) REFERENCES Users(UserID))')
+                 '(SearchID INTEGER PRIMARY KEY AUTOINCREMENT,'
+                 'SearchText TEXT NOT NULL,'
+                 'UserID TEXT NOT NULL,'
+                 'FOREIGN KEY(UserID) REFERENCES Users(UserID))')
             print("Table 'Users' Created Successfully!")
 
         except(sqlite3.OperationalError):
