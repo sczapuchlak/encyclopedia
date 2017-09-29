@@ -10,7 +10,6 @@ app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
 app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
 
-
 @app.route('/')
 @app.route('/index.html')
 @app.route('/index', methods=['get'])
