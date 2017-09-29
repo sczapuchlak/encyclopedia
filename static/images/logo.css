@@ -1,0 +1,28 @@
+.head-outline {
+    fill: url(#spots);
+}
+.eye-outline {
+    fill: #fff;
+}
+.iris {
+    fill: green;
+}
+  
+.chin {
+    fill: url(#fade-white);
+    stroke: none;
+}
+  
+.spot {
+    fill: #000;
+}
+
+.eye-line {
+    stroke: #000;
+    fill: #000;
+}
+
+.mouth {
+    stroke: #000;
+    fill: #000;
+}
