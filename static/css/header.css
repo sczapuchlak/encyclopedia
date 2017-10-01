@@ -46,6 +46,11 @@
     margin: unset;
 }
 
+.nav-list >
+.nav-item + .nav-item {
+    margin-left: 5px;
+}
+
 .nav-item {
     border-radius: 5px;
 }
