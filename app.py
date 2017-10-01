@@ -69,10 +69,10 @@ def sign_up():
             user_manager.add_user(first_name, last_name, username, password)
             session['user'] = username
         except Exception as e:
-            return render_template('signup.html', error_text="Unable to create user")
-        return render_template('home.html')
+            return render_template('signup.html', error_text="Unable to create user", header=render_template('header.html'))
+        return render_template('home.html', header=render_template('header.html'))
     else:
-        return render_template('signup.html')
+        return render_template('signup.html', header=render_template('header.html'))
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
     if logged in, auto logout after 30 minutes of inactivity
