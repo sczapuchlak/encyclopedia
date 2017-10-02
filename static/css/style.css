@@ -2,10 +2,7 @@ body {
     padding-top:1.5%;
     padding-bottom: 40px;
 }
-#footer p{
-    text-align: center;
 
-}
 .jumbotron{
     background: linear-gradient(#96d4ff, #12d0ff);
     padding-top: 13%;
@@ -76,3 +73,21 @@ body {
    border-top-color: #1b435e;
    background: #1b435e;
    }
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-128.png');
+    background-size: 30px 30px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 100%;
+}
