@@ -5,6 +5,7 @@
     <!---We can change the title of the site later... just needed something for the time being!-->
     <title>Py-splore the Web with Media Cheetah!</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/header.css" type="text/css" rel="stylesheet">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <style>
@@ -32,7 +33,8 @@
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
     <div class="container">
-        {% include "header.html" %}
+        <link type="text/css" rel="stylesheet" href="static/css/header.css" />
+        {% include "headerLogged.html" %}
         <div class="jumbotron" style=" height: 20px; text-align: center; background-color: transparent;
              background-size:2000px 600px;padding: .001em .001em">
         </div>
@@ -45,6 +47,7 @@
                     <input class="checkbox" type="checkbox" name="services" value="Twitter"  />Twitter<br /><br />
                     <input class="checkbox" type="checkbox" name="services" value="Giphy" />Giphy<br /><br />
                     <input class="checkbox" type="checkbox" name="services" value="Flickr" />Flickr<br /><br />
+                    <button class="button"><i class="fa fa-search">Search</i></button>
                 </form>
             </div>
             <div class="col-lg-6">
