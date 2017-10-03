@@ -4,7 +4,7 @@ from os import environ
 from src.database import Database
 from src.twitterAPI import Requestor
 from src.login import UserManager
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session,redirect
 app = Flask(__name__, '/static')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
@@ -100,6 +100,9 @@ def check_for_user():
     except ValueError:
         #if the expiration is not a valid float
         return False
+@app.route('/profile.html', methods=['get','post'])
+def profile():
+    render_template('profile.html')
 
 if __name__ == '__main__':
     app.run()
