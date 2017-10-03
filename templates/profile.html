@@ -7,44 +7,49 @@
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/header.css" type="text/css" rel="stylesheet">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="static/css/profile.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <style>
 
 
-    </style>
+    <script>
+
+</script>
+
 </head>
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
     <div class="container">
         <link type="text/css" rel="stylesheet" href="static/css/header.css" />
         {% include "headerLogged.html" %}
-        <div class="jumbotron" style=" height: 20px; text-align: center; background-color: transparent;
-             background-size:2000px 600px;padding: .001em .001em">
+      <div class="jumbotron" style=" background: #757F9A;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right,  #1a2980, #26d0ce);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #1a2980, #26d0ce); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */; padding-top: 13%;
+            text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);color: whitesmoke">
+            <h1>
+                <center style="font-weight:300; font-size: 38pt;height: 30pt;"> Your last five searches conveniently located in one place...</center>
+            </h1>
+            </br>
+            </br>
+            </br>
+            <h3>
+                <center> If you want to re search for something, click on it again! </center>
+            </h3>
         </div>
-        <div class=" row aboutTheCompany" style=" border: 1px solid grey;">
-            <div class="col-lg-6">
+
+         <div class=" row searches">
+            <div class="col-lg-12">
+                <h3 style="color: black;padding-bottom: 30px;padding-left: 35px; font-size: 24pt">
+                    <center> You've Searched...</center>
+                </h3>
 
             </div>
-            <div class="col-lg-6">
-                <p>
-
-                </p>
-            </div>
-        </div>
-        <br/>
-
-        <div class="results">
-            <ul>
-                {% for result in results %}
-                <li><span>{{result.text}}</span><br/></li>
-                {% endfor %}
-            </ul>
-        </div>
-    <br/><br/><br/>
-    <div style="padding-left: 130px">
 
         </div>
-     {% include "footer.html" %}
+        {% include "footer.html" %}
     </div>
+
+
+
 </body>
+
 </html>
