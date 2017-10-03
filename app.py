@@ -70,7 +70,7 @@ def sign_up():
             session['user'] = username
         except Exception as e:
             return render_template('signup.html', error_text="Unable to create user", header=render_template('header.html'))
-        return render_template('home.html', header=render_template('header.html'))
+        return render_template('home.html', header=render_template('headerLogged.html'))
     else:
         return render_template('signup.html', header=render_template('header.html'))
 def check_for_user():
@@ -102,7 +102,7 @@ def check_for_user():
         return False
 @app.route('/profile.html', methods=['get','post'])
 def profile():
-    render_template('profile.html')
+   return render_template('profile.html')
 
 if __name__ == '__main__':
     app.run()
