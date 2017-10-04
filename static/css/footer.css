@@ -1,0 +1,45 @@
+footer{
+    text-align: center;
+    background: whitesmoke;
+    padding-top:10%;
+}
+
+.fa {
+    padding: 19px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+.fa-snapchat {
+    background: #eee609;
+    color: white;
+}
+.fa-instagram {
+    background: #626aee;
+    color: white;
+}
+.fa-pinterest {
+    background: #ee190d;
+    color: white;
+}
+.fa-reddit{
+    background: #ee7210;
+    color: white;
+}
