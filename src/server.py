@@ -73,6 +73,10 @@ def sign_up():
         return render_template('home.html', header=render_template('header.html'))
     else:
         return render_template('signup.html', header=render_template('header.html'))
+@app.route('/profile.html', methods=['get','post'])
+def profile():
+   return render_template('profile.html')
+
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
     if logged in, auto logout after 30 minutes of inactivity
