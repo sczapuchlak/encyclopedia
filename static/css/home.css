@@ -15,14 +15,14 @@ input[type=text] {
 input[type=text]:focus {
     width: 100%;
 }
-    #term {
+  #term {
   font-size: 18pt;
   padding: 5px;
   font-family: sans-serif;
   width: 250px;
 }
 
-#predictiveText {
+#predictive {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
@@ -30,10 +30,9 @@ input[type=text]:focus {
   border: 1px solid black;
   width: 250px;
   padding: 5px;
-
 }
 
-#predictiveText.hidden {
+#predictive.hidden {
   display: none;
 }
 
