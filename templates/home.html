@@ -8,16 +8,50 @@
     <link href="static/css/header.css" type="text/css" rel="stylesheet">
     <link href="static/css/home.css" type="text/css" rel="stylesheet">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="static/scripts/home.js"></script>
+
+    <script type="text/javascript" src="static/scripts/home.js"></script>
+
+<style>
+  #term {
+  font-size: 18pt;
+  padding: 5px;
+  font-family: sans-serif;
+  width: 250px;
+}
+
+#predictive {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid black;
+  width: 250px;
+  padding: 5px;
+}
+
+#predictive.hidden {
+  display: none;
+}
+
+.search-suggestion {
+  height: 50px;
+}
+
+.search-suggestion:hover {
+  background: dodgerblue;
+  color: white;
+  display: block;
+  width: 100%;
+}
+
+</style>
 
 </head>
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
     <div class="container">
-        <link type="text/css" rel="stylesheet" href="static/css/header.css" />
         {% include "headerLogged.html" %}
         <div class="jumbotron" style=" height: 20px; text-align: center; background-color: transparent;
              background-size:2000px 600px;padding: .001em .001em">
@@ -27,12 +61,21 @@
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
                 <h4>Example: cat</h4><br/>
                 <form autocomplete="on" action="/search" method="post">
-                    <input type="text" name="term" id="term" placeholder="Search..." autofocus /><br /><br />
-                    <div id="predictiveText" class="hidden"></div>
-                    <input class="checkbox" type="checkbox" name="services" value="Twitter"  />Twitter<br /><br />
-                    <input class="checkbox" type="checkbox" name="services" value="Giphy" />Giphy<br /><br />
-                    <input class="checkbox" type="checkbox" name="services" value="Flickr" />Flickr<br /><br />
-                    <button class="button" onmousedown="cheetahMeow.play()"><i class="fa fa-search" style="width: 60pt;height: 10pt;text-align: center">Search</i></button>
+                    <input type="text" name="term" id="term" placeholder="Search..." autofocus />
+                  <div id="predictive" class="hidden">
+                  </div>
+
+                   <br /><br />
+                    <label>
+                       <input class="checkbox" type="checkbox" name="services" value="Twitter"/>
+                    </label>Twitter<br /><br />
+                    <label>
+                        <input class="checkbox" type="checkbox" name="services" value="Giphy"/>
+                    </label>Giphy<br /><br />
+                    <label>
+                        <input class="checkbox" type="checkbox" name="services" value="Flickr"/>
+                    </label>Flickr<br /><br />
+                    <button class="button" onmousedown="cheetahMeow.play();"><i class="fa fa-search" style="width: 60pt;height: 10pt;text-align: center">Search</i></button>
                 </form>
             </div>
             <div class="col-lg-6">
@@ -64,4 +107,6 @@
     </div>
 
 </body>
+
+
 </html>
