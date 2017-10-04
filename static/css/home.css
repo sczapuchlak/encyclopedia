@@ -1,0 +1,49 @@
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-size: 30px 30px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 100%;
+}
+    #term {
+  font-size: 18pt;
+  padding: 5px;
+  font-family: sans-serif;
+  width: 250px;
+}
+
+#predictiveText {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: 1px solid black;
+  width: 250px;
+  padding: 5px;
+
+}
+
+#predictiveText.hidden {
+  display: none;
+}
+
+.search-suggestion {
+  height: 50px;
+}
+
+.search-suggestion:hover {
+  background: dodgerblue;
+  color: white;
+  display: block;
+  width: 100%;
+}

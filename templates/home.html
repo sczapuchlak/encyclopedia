@@ -6,29 +6,13 @@
     <title>Py-splore the Web with Media Cheetah!</title>
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/header.css" type="text/css" rel="stylesheet">
+    <link href="static/css/home.css" type="text/css" rel="stylesheet">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-128.png');
-    background-size: 30px 30px;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-input[type=text]:focus {
-    width: 100%;
-}
-</style>
+<script src="static/scripts/home.js"></script>
+
 </head>
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
@@ -43,11 +27,12 @@ input[type=text]:focus {
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
                 <h4>Example: cat</h4><br/>
                 <form autocomplete="on" action="/search" method="post">
-                    <input type="text" name="term" id="term" placeholder="Search.." autofocus /><br /><br />
+                    <input type="text" name="term" id="term" placeholder="Search..." autofocus /><br /><br />
+                    <div id="predictiveText" class="hidden"></div>
                     <input class="checkbox" type="checkbox" name="services" value="Twitter"  />Twitter<br /><br />
                     <input class="checkbox" type="checkbox" name="services" value="Giphy" />Giphy<br /><br />
                     <input class="checkbox" type="checkbox" name="services" value="Flickr" />Flickr<br /><br />
-                    <button class="button"><i class="fa fa-search" style="width: 60pt;height: 10pt;text-align: center">Search</i></button>
+                    <button class="button" onmousedown="cheetahMeow.play()"><i class="fa fa-search" style="width: 60pt;height: 10pt;text-align: center">Search</i></button>
                 </form>
             </div>
             <div class="col-lg-6">
@@ -77,5 +62,6 @@ input[type=text]:focus {
         </div>
        {% include "footer.html" %}
     </div>
+
 </body>
 </html>
