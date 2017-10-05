@@ -43,6 +43,14 @@ class Database():
         curs.execute('INSERT INTO Users (FirstName, LastName, UserName, Password) VALUES(?,?,?,?)', (first_name, last_name, username, password))
         self.conn.commit()
         self.conn.close()
+
+    def find_user_with_email(self, email):
+        '''find_user_with_email method that takes the users email and returns the users information'''
+        curs = self._get_cursor()
+        curs.execute('SELECT UserID, (FirstName + LastName) as Name, UserName FROM Users WHERE EmailAdress = ?', (email))
+        all_rows = curs.fetchall()
+        return all_rows
+
     def _get_cursor(self):
         self.conn = sqlite3.connect(self.sql_file)
         return self.conn.cursor()
