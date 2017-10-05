@@ -344,3 +344,4 @@ fabric.properties
 
 # database file
 **/*.sqlite3
+**/encyclopediaDB

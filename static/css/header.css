@@ -1,0 +1,80 @@
+.header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    background: url(../images/header-background.jpg);
+    margin-bottom: 15px;
+}
+
+.logo {
+    width: 300px;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link:hover {
+    text-decoration: none;
+}
+
+.logo-image {
+    width: 60px;
+    height: 60px;
+}
+
+.logo-text {
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.nav-list {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    margin: unset;
+}
+
+.nav-list >
+.nav-item + .nav-item {
+    margin-left: 5px;
+}
+
+.nav-item {
+    border-radius: 5px;
+}
+
+.nav-item:hover {
+    background: dodgerblue;
+}
+
+.nav-link {
+    padding: 5px 15px;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.nav-link,
+.nav-link:visited,
+.nav-link:active {
+    color: dodgerblue;
+}
+
+.nav-link:hover {
+    color: white;
+    text-decoration: none;
+}
