@@ -4,7 +4,7 @@ from os import environ
 from src.twitterAPI import Requestor
 from src.login import UserManager
 from src.logger import Logger
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
@@ -18,7 +18,7 @@ def index():
     Logger.log('index %s' % session)
     if check_for_user():
         Logger.log('user exists sending home.html')
-        return render_template('home.html')
+        return redirect('/home.html')
     Logger.log('user does not exist, returning index.html')
     return render_template('index.html')
 @app.route('/login', methods=['post', 'get'])
@@ -34,14 +34,14 @@ def auth():
             Logger.log('user login valid')
             session['username'] = username
             session['expiration'] = time.time() + (30 * 60)
-            return render_template('home.html')
+            return redirect('home.html')
         Logger.log('user login invalid')
         return render_template('login.html', error_text="Invalid username or password")
     else:
         Logger.log('GET')
         if check_for_user():
             Logger.log('User is logged in, sending to home')
-            return render_template('home.html')
+            return redirect('home.html')
         Logger.log('User is not logged in, sending to login page')
         return render_template('login.html')
 @app.route('/search', methods=['post'])
@@ -64,7 +64,7 @@ def home():
         Logger.log('user logged in, sending to home')
         return render_template('home.html', results=list())
     Logger.log('user not logged in, sending to index')
-    return render_template('index.html')
+    return redirect('index.html')
 @app.route('/signup', methods=['get', 'post'])
 @app.route('/signup.html', methods=['get'])
 def sign_up():
@@ -84,13 +84,16 @@ def sign_up():
         except Exception as e:
             Logger.log('failed to create user')
             return render_template('signup.html', error_text="Unable to create user")
-        return render_template('home.html')
+        Logger.log('redirecting to home')
+        return redirect('home.html')
     else:
         Logger.log('sending signup')
         return render_template('signup.html')
 @app.route('/profile.html', methods=['get','post'])
 def profile():
-    return render_template('profile.html')
+    if check_for_user():
+        return render_template('profile.html')
+    return redirect('/index.html')
 
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
