@@ -2,6 +2,7 @@
 import time
 from os import environ
 from src.twitterAPI import Requestor
+from src.giphyAPI import Giphy
 from src.login import UserManager
 from src.logger import Logger
 from flask import Flask, render_template, request, session, redirect
@@ -50,11 +51,16 @@ def search():
     term = request.form.get('term', None)
     services = request.form.getlist('services', None)
     requestor = Requestor()
+    results = list()
     if 'Twitter' in services:
         Logger.log('Twitter')
-        results = requestor.search_twitter(term)
+        results.extend(requestor.search_twitter(term))
         Logger.log(results)
-        return render_template('home.html', results=results)
+    if 'Giphy' in services:
+        Logger.log('Giphy')
+        g = Giphy()
+        results.extend(g.search_giphy(term))
+    Logger.log('returning list of results %s' % results)
     return render_template('home.html', results=list())
 @app.route('/home')
 @app.route('/home.html')
