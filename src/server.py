@@ -94,7 +94,15 @@ def profile():
     if check_for_user():
         return render_template('profile.html')
     return redirect('/index.html')
-
+@app.route('/signout', methods=['get'])
+def signout():
+    '''sign the current user out'''
+    if check_for_user():
+        Logger.log('user logged in, signing out')
+        del session['username']
+        del session['expiration']
+    Logger.log('redirecting to index')
+    return redirect('/')
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
     if logged in, auto logout after 30 minutes of inactivity
@@ -114,8 +122,8 @@ def check_for_user():
         if current > expiration:
             Logger.log('current is greater than expiration, removing')
             #remove the user from the session
-            session.popitem(session_username)
-            session.popitem(expiration)
+            del session['username']
+            del session['expiration']
             return False
         else:
             Logger.log('current is less than expiration, refreshing')
