@@ -16,7 +16,6 @@ app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
 @app.route('/index', methods=['get'])
 def index():
     'Main template route'
-    Logger.log('index %s' % session)
     if check_for_user():
         Logger.log('user exists sending home.html')
         return redirect('/home.html')
@@ -33,8 +32,7 @@ def auth():
         user_manager = UserManager()
         if user_manager.validate_credentials(username, password):
             Logger.log('user login valid')
-            session['username'] = username
-            session['expiration'] = time.time() + (30 * 60)
+            sign_user_in(username)
             return redirect('home.html')
         Logger.log('user login invalid')
         return render_template('login.html', error_text="Invalid username or password")
@@ -85,7 +83,7 @@ def sign_up():
         user_manager = UserManager()
         try:
             user_manager.add_user(first_name, last_name, username, password)
-            session['username'] = username
+            sign_user_in(username)
             Logger.log('user created')
         except Exception as e:
             Logger.log('failed to create user')
@@ -105,8 +103,7 @@ def signout():
     '''sign the current user out'''
     if check_for_user():
         Logger.log('user logged in, signing out')
-        del session['username']
-        del session['expiration']
+        sign_user_out()
     Logger.log('redirecting to index')
     return redirect('/')
 def check_for_user():
@@ -128,13 +125,12 @@ def check_for_user():
         if current > expiration:
             Logger.log('current is greater than expiration, removing')
             #remove the user from the session
-            del session['username']
-            del session['expiration']
+            sign_user_out()
             return False
         else:
             Logger.log('current is less than expiration, refreshing')
             #refresh the expiration to be 30 minutes from now
-            session['expiration'] = current + (30 * 60)
+            add_expiration()
             return True
     except KeyError:
         Logger.log('No username in session')
@@ -144,6 +140,15 @@ def check_for_user():
         Logger.log('expiration was not a valid float %s' % expiration)
         #if the expiration is not a valid float
         return False
-
+def sign_user_in(username):
+    '''add the required information to the session for a signed in user'''
+    session['username'] = username
+    add_expiration()
+def add_expiration():
+    session['expiration'] = time.time() + (30 * 60)
+def sign_user_out():
+    '''remove the information from the session to sign a user out'''
+    del session['username']
+    del session['expiration']
 if __name__ == '__main__':
     app.run()
