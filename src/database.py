@@ -16,6 +16,7 @@ class Database():
                  '(UserID INTEGER PRIMARY KEY AUTOINCREMENT ,'
                  'FirstName TEXT NOT NULL,'
                  'LastName TEXT NOT NULL,'
+                 'EmailAddress TEXT NOT NULL,'
                  'UserName TEXT NOT NULL,'
                  'Password TEXT NOT NULL);')
 
