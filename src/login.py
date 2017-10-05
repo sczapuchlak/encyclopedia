@@ -26,7 +26,7 @@ class UserManager():
         user = self.database.get_user(username)
         if user is None:
             return False
-        db_hash = user[4]
+        db_hash = user[5]
         user_hash = bcrypt.hashpw(password, db_hash)
         return user_hash == db_hash
 
