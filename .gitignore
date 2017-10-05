@@ -342,4 +342,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# database file
+**/*.sqlite3
 **/encyclopediaDB
