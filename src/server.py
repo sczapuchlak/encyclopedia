@@ -1,11 +1,11 @@
 '''main entrypoint for the application'''
 import time
 from os import environ
-from src.database import Database
 from src.twitterAPI import Requestor
 from src.login import UserManager
+from src.logger import Logger
 from flask import Flask, render_template, request, session
-app = Flask(__name__, '/static')
+app = Flask(__name__, '/static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
 app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
@@ -15,6 +15,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
 @app.route('/index', methods=['get'])
 def index():
     'Main template route'
+    Logger.log('index %s' % session)
     if check_for_user():
         return render_template('home.html')
     return render_template('index.html')
@@ -75,33 +76,41 @@ def sign_up():
         return render_template('signup.html', header=render_template('header.html'))
 @app.route('/profile.html', methods=['get','post'])
 def profile():
-   return render_template('profile.html')
+    return render_template('profile.html')
 
 def check_for_user():
     '''check if a user has logged in, refresh the expiration
     if logged in, auto logout after 30 minutes of inactivity
     '''
+    Logger.log('checking for user')
     try:
         # will throw a KeyError if it doesn't exist
-        _ = session['username']
+        session_username = session['username']
+        Logger.log('session_username %s' % session_username)
         #will throw a ValueError if not a number
         expiration = float(session['expiration'])
+        Logger.log('session_expiration %s' % expiration)
         #get the current time in seconds
         current = time.time()
+        Logger.log('current time %s' % current)
         #if the login has expired
         if current > expiration:
+            Logger.log('current is greater than expiration, removing')
             #remove the user from the session
-            session['username'] = None
-            expiration = None
+            session.popitem(session_username)
+            session.popitem(expiration)
             return False
         else:
+            Logger.log('current is less than expiration, refreshing')
             #refresh the expiration to be 30 minutes from now
             session['expiration'] = current + (30 * 60)
             return True
     except KeyError:
+        Logger.log('No username in session')
         #if the username or expiration is not in the session
         return False
     except ValueError:
+        Logger.log('expiration was not a valid float %s' % expiration)
         #if the expiration is not a valid float
         return False
 
