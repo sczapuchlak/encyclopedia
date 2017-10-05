@@ -1,12 +1,12 @@
 import unittest
 
 class TestTest(unittest.TestCase):
-    def first_test(self):
-        assert(True)
-    def second_test(self):
-        assertEqual('first', 'first')
-    def second_test(self):
-        assertEqual('third', 'third')
+    def test_one(self):
+        self.assertTrue(True)
+    def test_two(self):
+        self.assertEqual('first', 'first')
+    def test_three(self):
+        self.assertEqual('third', 'third')
 
 
 if __name__ == '__main__':
