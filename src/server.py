@@ -11,6 +11,9 @@ app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
 app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
 
+USER_MANAGER = UserManager()
+
+
 @app.route('/')
 @app.route('/index.html')
 @app.route('/index', methods=['get'])
@@ -29,8 +32,7 @@ def auth():
         Logger.log('POST')
         username = request.form.get('username', None)
         password = request.form.get('password', None)
-        user_manager = UserManager()
-        if user_manager.validate_credentials(username, password):
+        if USER_MANAGER.validate_credentials(username, password):
             Logger.log('user login valid')
             sign_user_in(username)
             return redirect('home.html')
@@ -80,14 +82,13 @@ def sign_up():
         first_name = request.form.get('first-name')
         last_name = request.form.get('last-name')
         email = request.form.get('email')
-        user_manager = UserManager()
         try:
-            user_manager.add_user(first_name, last_name, username, password)
+            USER_MANAGER.add_user(first_name, last_name, username, password, email)
             sign_user_in(username)
             Logger.log('user created')
-        except Exception as e:
+        except RuntimeError as e:
             Logger.log('failed to create user')
-            return render_template('signup.html', error_text="Unable to create user")
+            return render_template('signup.html', error_text=e.args[0])
         Logger.log('redirecting to home')
         return redirect('home.html')
     else:
