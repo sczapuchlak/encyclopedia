@@ -5,7 +5,7 @@ from src.twitterAPI import Requestor
 from src.login import UserManager
 from src.logger import Logger
 from flask import Flask, render_template, request, session
-app = Flask(__name__, '/static', template_folder='../templates')
+app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
 app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
@@ -17,24 +17,32 @@ def index():
     'Main template route'
     Logger.log('index %s' % session)
     if check_for_user():
+        Logger.log('user exists sending home.html')
         return render_template('home.html')
+    Logger.log('user does not exist, returning index.html')
     return render_template('index.html')
 @app.route('/login', methods=['post', 'get'])
 @app.route('/login.html', methods=['get'])
 def auth():
     'Authentication endpoint'
     if request.method == 'POST':
+        Logger.log('POST')
         username = request.form.get('username', None)
         password = request.form.get('password', None)
         user_manager = UserManager()
         if user_manager.validate_credentials(username, password):
+            Logger.log('user login valid')
             session['username'] = username
             session['expiration'] = time.time() + (30 * 60)
             return render_template('home.html')
+        Logger.log('user login invalid')
         return render_template('login.html', error_text="Invalid username or password")
     else:
+        Logger.log('GET')
         if check_for_user():
+            Logger.log('User is logged in, sending to home')
             return render_template('home.html')
+        Logger.log('User is not logged in, sending to login page')
         return render_template('login.html')
 @app.route('/search', methods=['post'])
 def search():
@@ -43,37 +51,43 @@ def search():
     services = request.form.getlist('services', None)
     requestor = Requestor()
     if 'Twitter' in services:
+        Logger.log('Twitter')
         results = requestor.search_twitter(term)
-        print(results)
+        Logger.log(results)
         return render_template('home.html', results=results)
-    #placeholder to ping the apis
     return render_template('home.html', results=list())
 @app.route('/home')
 @app.route('/home.html')
 def home():
     '''search form'''
     if check_for_user():
+        Logger.log('user logged in, sending to home')
         return render_template('home.html', results=list())
+    Logger.log('user not logged in, sending to index')
     return render_template('index.html')
 @app.route('/signup', methods=['get', 'post'])
 @app.route('/signup.html', methods=['get'])
 def sign_up():
     'Sign up a new user'
     if request.method == 'POST':
+        Logger.log('POST')
         username = request.form.get('username')
         password = request.form.get('password')
         first_name = request.form.get('first-name')
         last_name = request.form.get('last-name')
-        print(first_name, last_name, username, password)
+        email = request.form.get('email')
         user_manager = UserManager()
         try:
             user_manager.add_user(first_name, last_name, username, password)
-            session['user'] = username
+            session['username'] = username
+            Logger.log('user created')
         except Exception as e:
-            return render_template('signup.html', error_text="Unable to create user", header=render_template('header.html'))
-        return render_template('home.html', header=render_template('header.html'))
+            Logger.log('failed to create user')
+            return render_template('signup.html', error_text="Unable to create user")
+        return render_template('home.html')
     else:
-        return render_template('signup.html', header=render_template('header.html'))
+        Logger.log('sending signup')
+        return render_template('signup.html')
 @app.route('/profile.html', methods=['get','post'])
 def profile():
     return render_template('profile.html')
