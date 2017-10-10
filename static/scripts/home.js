@@ -10,7 +10,6 @@ window.onload = function() {
         'hippopotamus',
         'banana',
         'fruit',
-        'hippopotamus',
     ];
 
     function keyPressed(event) {
@@ -52,6 +51,5 @@ window.onload = function() {
         }
     }
 
-    const cheetahMeow = new Audio();
-    cheetahMeow.src = url("http://www.kessels.com/CatSounds/lion3.wav")
-};
+
+   };

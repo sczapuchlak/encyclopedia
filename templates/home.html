@@ -45,9 +45,35 @@
   display: block;
   width: 100%;
 }
+input[type="checkbox"] {
+    display: inline-block;
+    width: 15px;
+    vertical-align: top;
+}
+
+.label-text {
+  display: inline-block;
+    font-size: 40pt;
+  width: 200px;
+  word-break: break-all;
+}
+label{
+    font-size: 125%
+}
 
 </style>
+<script>
+    function toggle(source) {
+  checkboxes = document.getElementsByName('services');
+        let i = 0, n = checkboxes.length;
+        for(; i<n; i++) {
+    checkboxes[i].checked = source.checked;
+        }}
+  const cheetahMeow = new Audio();
+    cheetahMeow.src = url("http://www.kessels.com/CatSounds/lion3.wav");
 
+
+</script>
 </head>
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
@@ -61,21 +87,22 @@
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
                 <h4>Example: cat</h4><br/>
                 <form autocomplete="on" action="/search" method="post">
-                    <input type="text" name="term" id="term" placeholder="Search..." autofocus />
+                    <input type="text" style="font-size: 125%" name="term" id="term" placeholder="search..." autofocus />
                   <div id="predictive" class="hidden">
                   </div>
 
                    <br /><br />
-                    <label>
+                    <label >
                        <input class="checkbox" type="checkbox" name="services" value="Twitter"/>
-                    </label>Twitter<br /><br />
+                    Twitter</label><br /><br />
                     <label>
-                        <input class="checkbox" type="checkbox" name="services" value="Giphy"/>
-                    </label>Giphy<br /><br />
+                        <input class="checkbox" type="checkbox" name="services" value="Giphy"/>Giphy</label><br /><br />
                     <label>
-                        <input class="checkbox" type="checkbox" name="services" value="Flickr"/>
-                    </label>Flickr<br /><br />
-                    <button class="button" onmousedown="cheetahMeow.play();"><i class="fa fa-search" style="width: 60pt;height: 10pt;text-align: center">Search</i></button>
+                        <input class="checkbox" type="checkbox" name="services" value="Flickr"/>Flickr</label><br />
+                    <h2>OR</h2>
+                    <label>
+                    <input class="checkbox" type="checkbox" name="services" value="SelectAll" onClick="toggle(this)"/>Select All Services</label><br /><br />
+                    <button class="button" style="height: 50px; width: 140px;font-size: 125%" onmousedown="cheetahMeow.play();">Search</button>
                 </form>
             </div>
             <div class="col-lg-6">
