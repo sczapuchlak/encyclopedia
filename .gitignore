@@ -344,4 +344,9 @@ fabric.properties
 
 # database file
 **/*.sqlite3
+**/*.sqlite
 **/encyclopediaDB
+
+
+# npm stuff
+**/node_modules/
