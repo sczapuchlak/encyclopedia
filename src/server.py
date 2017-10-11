@@ -62,7 +62,7 @@ def search():
         g = Giphy()
         results.extend(g.search_giphy(term))
     Logger.log('returning list of results %s' % results)
-    return render_template('home.html', results=list())
+    return render_template('home.html', results=results)
 @app.route('/home')
 @app.route('/home.html')
 def home():

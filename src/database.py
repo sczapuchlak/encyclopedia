@@ -12,7 +12,7 @@ class Database():
         '''gets user information based on the username'''
         conn = self._get_connection()
         curs = conn.cursor()
-        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress FROM Users WHERE Username = "{un}"'.format(un=username))
+        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress, password FROM Users WHERE Username = "{un}"'.format(un=username))
         user = curs.fetchone()
         conn.close()
         print(user)
@@ -22,7 +22,7 @@ class Database():
         conn = self._get_connection()
         curs = conn.cursor()
         curs.execute('''INSERT INTO Users 
-                        (FirstName, LastName, UserName, Password, EmailAddress) 
+                        (FirstName, LastName, UserName, Password, EmailAddress)
                         VALUES("{fn}","{ln}","{un}","{pw}","{em}")'''\
                         .format(fn=first_name, ln=last_name, un=username, pw=password, em=email))
         conn.commit()
@@ -31,7 +31,7 @@ class Database():
         '''find_user_with_email method that takes the users email and returns the users information'''
         conn = self._get_connection()
         curs = conn.cursor()
-        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress FROM Users WHERE EmailAddress = "{em}"'.format(em=email))
+        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress, password FROM Users WHERE EmailAddress = "{em}"'.format(em=email))
         all_rows = curs.fetchone()
         conn.close()
         return all_rows
