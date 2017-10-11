@@ -1,6 +1,7 @@
 '''User related activities'''
 import bcrypt
 from src.database import Database
+from src.user import User
 
 class UserManager():
     '''Manager the user's of this application'''
@@ -9,12 +10,14 @@ class UserManager():
 
     def add_user(self, first_name, last_name, username, password, email):
         '''Add a user to the database'''
+
         if self.find_user(username, email) is None:
             password_hash = self._hash_password(password)
-            self.database.add_user(first_name, last_name, username, password_hash, email)
+            user = User(first_name, last_name, username, email, password=password_hash)
+            self.database.add_user(user)
         else:   
             raise RuntimeError('User already exists')
-    def find_user(self,username, email):
+    def find_user(self, username, email):
         '''looks for username and email'''
         user = self.database.get_user(username)
         if user is not None:

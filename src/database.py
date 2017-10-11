@@ -1,65 +1,58 @@
 '''Database Module'''
-__author__ = 'Alex'
 import sqlite3
-
+from src.user import User
+from src.userSearch import UserSearch
+from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.orm import mapper, sessionmaker
+METADATA = MetaData()
 #database class
 class Database():
     '''Data Access Layer'''
-    def __init__(self):
-        self.sql_file = "encyclopedia.sqlite3"
-        self._try_create_tables()
+    def __init__(self, connection_string='sqlite:///test.sqlite3'):
+        self.sql_file = connection_string
+        self.users = self._map_users()
+        self.user_searches = self._map_user_searches()
+        self.engine = self._get_connection()
+        METADATA.create_all(self.engine)
+        #old: self._try_create_tables()
+
+#-------------------------------------NEW CODE FOR ORM-------------------------------------------
+    def add_user(self, user):
+        session = self._get_session()
+        session.add(user)
+        session.commit()
     def get_user(self, username):
-        '''gets user information based on the username'''
-        conn = self._get_connection()
-        curs = conn.cursor()
-        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress, password FROM Users WHERE Username = "{un}"'.format(un=username))
-        user = curs.fetchone()
-        conn.close()
-        print(user)
-        return user
-    def add_user(self, first_name, last_name, username, password, email):
-        '''add_user method that takes in information name, username, and password to add a user to the Table Users'''
-        conn = self._get_connection()
-        curs = conn.cursor()
-        curs.execute('''INSERT INTO Users 
-                        (FirstName, LastName, UserName, Password, EmailAddress)
-                        VALUES("{fn}","{ln}","{un}","{pw}","{em}")'''\
-                        .format(fn=first_name, ln=last_name, un=username, pw=password, em=email))
-        conn.commit()
-        conn.close()
+        session = self._get_session()
+        for user in session.query(User).\
+            filter(User.user_name==username):
+            return user
     def find_user_with_email(self, email):
-        '''find_user_with_email method that takes the users email and returns the users information'''
-        conn = self._get_connection()
-        curs = conn.cursor()
-        curs.execute('SELECT UserID, FirstName, LastName, UserName, EmailAddress, password FROM Users WHERE EmailAddress = "{em}"'.format(em=email))
-        all_rows = curs.fetchone()
-        conn.close()
-        return all_rows
+        session = self._get_session()
+        for user in session.query(User).\
+            filter(User.user_name==email):
+            return user
+    def _map_users(self):
+        users = Table('Users', METADATA,\
+            Column('user_id', Integer, primary_key=True),
+            Column('first_name', String),\
+            Column('last_name', String),\
+            Column('user_name', String),\
+            Column('password', String),\
+            Column('email_address', String))
+        mapper(User, users)
+        return users
+    def _map_user_searches(self):
+        user_searches = Table('UserSearches', METADATA,\
+            Column('search_id', Integer, primary_key=True),
+            Column('search_text', String),\
+            Column('user_id', Integer))
+        mapper(UserSearch, user_searches)
+        return user_searches
     def _get_connection(self):
-        return sqlite3.connect(self.sql_file)
-    def _try_create_tables(self):
-        try:
-            conn = self._get_connection()
-            print("Connection to " + self.sql_file + " success!")
-            curs = conn.cursor()
-            #Users Table
-            curs.execute('''CREATE TABLE Users
-                 (UserID INTEGER PRIMARY KEY AUTOINCREMENT ,
-                 FirstName TEXT NOT NULL,
-                 LastName TEXT NOT NULL,
-                 EmailAddress TEXT NOT NULL,
-                 UserName TEXT NOT NULL,
-                 Password TEXT NOT NULL);''')
-            #UserSearch Table
-            print("Table 'Users' Created Successfully!")
-            curs.execute('''CREATE TABLE UserSearch
-                 (SearchID INTEGER PRIMARY KEY AUTOINCREMENT,
-                 SearchText TEXT NOT NULL,
-                 UserID TEXT NOT NULL,
-                 FOREIGN KEY(UserID) REFERENCES Users(UserID))''')
-            print('Table UserSearch created successfully!')
-        except(sqlite3.OperationalError):
-            print("Tables already exists")
-        conn.close()
+        engine = create_engine(self.sql_file)
+        return engine
+    def _get_session(self):
+        Session = sessionmaker(bind=self.engine)
+        return Session()
 if __name__ == '__main__':
     _ = Database()
