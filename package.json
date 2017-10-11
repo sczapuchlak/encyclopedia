@@ -1,0 +1,26 @@
+{
+  "name": "media.cheetah",
+  "version": "0.3.0",
+  "description": "Previously known as the Encyclopedia app, Media Cheetah is an application that allows users to search for media through the patented Media Cheetah search engine.\r Whether you are looking for cats on Twitter, or monstertrucks on Flickr, we have what you need.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sczapuchlak/encyclopedia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sczapuchlak/encyclopedia/issues"
+  },
+  "homepage": "https://github.com/sczapuchlak/encyclopedia#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1"
+  }
+}

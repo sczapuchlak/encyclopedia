@@ -1,15 +1,16 @@
 '''main entrypoint for the application'''
 import time
-from os import environ
+from os import environ, path
 from src.twitterAPI import Requestor
 from src.giphyAPI import Giphy
 from src.login import UserManager
 from src.logger import Logger
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_from_directory
 app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
 app.config['TEMPLATES_AUTO_RELOAD'] = app.config['DEBUG']
+
 
 USER_MANAGER = UserManager()
 
@@ -151,5 +152,9 @@ def sign_user_out():
     '''remove the information from the session to sign a user out'''
     del session['username']
     del session['expiration']
+@app.route('/favicon.ico', methods=['get'])
+def favicon():
+    Logger.log('')
+    return send_from_directory(path.join(app.root_path, 'static', 'images'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 if __name__ == '__main__':
     app.run()
