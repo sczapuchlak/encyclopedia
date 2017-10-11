@@ -8,7 +8,7 @@ METADATA = MetaData()
 #database class
 class Database():
     '''Data Access Layer'''
-    def __init__(self, connection_string='sqlite:///test.sqlite3'):
+    def __init__(self, connection_string='sqlite:///media.cheetah.sqlite3'):
         self.sql_file = connection_string
         self.users = self._map_users()
         self.user_searches = self._map_user_searches()
