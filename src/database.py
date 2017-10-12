@@ -14,9 +14,7 @@ class Database():
         self.user_searches = self._map_user_searches()
         self.engine = self._get_connection()
         METADATA.create_all(self.engine)
-        #old: self._try_create_tables()
 
-#-------------------------------------NEW CODE FOR ORM-------------------------------------------
     def add_user(self, user):
         session = self._get_session()
         session.add(user)
