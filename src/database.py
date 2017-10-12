@@ -20,7 +20,6 @@ class Database():
             print(e)
         #old: self._try_create_tables()
 
-#-------------------------------------NEW CODE FOR ORM-------------------------------------------
     def add_user(self, user):
         session = self._get_session()
         session.add(user)
