@@ -7,7 +7,10 @@ class UserManager():
         self.database = Database()
     def add_user(self, first_name, last_name, username, password):
         '''Add a user to the database'''
-        password_hash = self._hash_password(password)
+        if username in Database:
+            return
+        else:
+            password_hash = self._hash_password(password)
         self.database.add_user(first_name, last_name, username, password_hash)
     def validate_credentials(self, username, password):
         '''validate a password matches what is in the database'''
