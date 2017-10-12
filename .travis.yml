@@ -7,3 +7,6 @@ script:
   - python -m unittest tests/*.py
 notifications:
   - email: false
+branches:
+  only: 
+    - master
