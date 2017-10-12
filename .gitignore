@@ -182,7 +182,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-./vscode/*
+**/.vscode/*
 
 #API secrets (jen)
 config.py
