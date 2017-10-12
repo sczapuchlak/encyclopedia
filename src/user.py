@@ -9,8 +9,8 @@ class User(object):
         self.user_id = user_id
         self.searches = searches
     def __repr__(self):
-        return '{id}:{un}\n----------\n{fn} {ln}\n{e}\n{p}'\
+        return '{id}:{un}\n----------\n{fn} {ln}\n{e}\n{p}\nsearches: {ss}'\
         .format(id=self.user_id, un=self.user_name, fn=self.first_name, \
-        ln=self.last_name,e=self.email_address, p=self.password)
+        ln=self.last_name,e=self.email_address, p=self.password, ss=self.searches)
     def __str__(self):
         return self.__repr__()

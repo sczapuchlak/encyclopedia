@@ -5,7 +5,7 @@ from src.twitterAPI import Requestor
 from src.giphyAPI import Giphy
 from src.login import UserManager
 from src.logger import Logger
-from flask import Flask, render_template, request, session, redirect, send_from_directory
+from flask import Flask, render_template, request, session, redirect, send_from_directory, jsonify
 app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
 app.config['DEBUG'] = environ.get('env') != 'PROD'
@@ -95,10 +95,28 @@ def sign_up():
     else:
         Logger.log('sending signup')
         return render_template('signup.html')
+@app.route('/searches', methods=['get'])
+def searches():
+    sign_user_in('asdf')
+    if check_for_user():
+        username = session['username']
+        Logger.log(username)
+        user = USER_MANAGER.get_user_profile(username)
+        Logger.log(user.searches)
+        return jsonify(searches=list(map(lambda s: s.search_text,user.searches)))
+    return jsonify(searches=list())
 @app.route('/profile.html', methods=['get','post'])
 def profile():
-    if check_for_user():
-        return render_template('profile.html')
+    if request.method == 'GET' :
+        Logger.log('GET')
+        if check_for_user():
+            username = session['username']
+            Logger.log(username)
+            user = USER_MANAGER.get_user_profile(username)
+            Logger.log(user)
+            if (user is None):
+                return render_template('profile.html', error='Unable to find user')
+            return render_template('profile.html', user=user)
     return redirect('/index.html')
 @app.route('/signout', methods=['get'])
 def signout():
