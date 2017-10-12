@@ -58,11 +58,17 @@ class Database():
         user_searches.create(self.engine, checkfirst=True)
         return (users, user_searches)
     def _map_users(self):
-        mapper(User, self.users, properties={
-            'searches': relationship(UserSearch, backref="Users")
-        })
+        try:
+            mapper(User, self.users, properties={
+                'searches': relationship(UserSearch, backref="Users")
+            })
+        except:
+            pass
     def _map_user_searches(self):
-        mapper(UserSearch, self.user_searches)
+        try:
+            mapper(UserSearch, self.user_searches)
+        except:
+            pass
     def _get_connection(self):
         engine = create_engine(self.sql_file)
         return engine
