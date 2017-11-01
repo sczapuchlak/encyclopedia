@@ -97,7 +97,6 @@ def sign_up():
         return render_template('signup.html')
 @app.route('/searches', methods=['get'])
 def searches():
-    sign_user_in('asdf')
     if check_for_user():
         username = session['username']
         Logger.log(username)
