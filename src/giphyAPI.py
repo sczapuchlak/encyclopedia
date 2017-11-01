@@ -11,34 +11,42 @@ class Giphy(object):
         self.token = environ.get('giphy_access_key')
         self.token = giphyKeys.giphy_key
     def search_giphy(self, word):
+        '''search for gifs on giphy'''
         '''
-        -----------------------------------------------------------------------
-        Make outbound request to Giphy & perform a basic search
-        -----------------------------------------------------------------------
+            -----------------------------------------------------------------------
+            Make outbound request to Giphy & perform a basic search
+
+            - Returns list of 10 iframes containing gifs (to embed gif)
+            
+            NOTE: If you want the Gif ID returned instead of iframe,
+            change line 67 to read:
+            list_of_gifs.append(results)
+            -----------------------------------------------------------------------
+            Refrences:
+            https://github.com/StewPoll/safygiphy
+            https://developers.giphy.com/docs/
+            -----------------------------------------------------------------------
         '''
         # Should have dashes and not spaces
         if word:
             word = word.replace(' ', '-')
-
+        # New Request Object with API Credentials
         giphy = safygiphy.Giphy(token=self.token)
-        # Will return a random GIF with tag "word"
-
+        # To hold return results
         list_of_gifs = []
-        #Prefix/Suffix to Embed the results (id of gif)
+
+        # Prefix/Suffix to Embed the results
         prefix = """<iframe src="https://giphy.com/embed/"""
         suffix = """" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>"""
-
+        # Produce collection of 10 iframes containing gifs @ random by search word
         for i in range(10):
-
             results = giphy.random(tag=word)["data"]["id"]
             embed_gifs = prefix + results + suffix
-            print(embed_gifs)
+            # print(embed_gifs) this was to make sure correct syntax
             list_of_gifs.append(embed_gifs)
 
-            #If you don't want the iframes attached as a result, I can just return the 'id' for you to enter into a front end iframe
-            #by chaging line# to list_of_gifs.append(results)
-
         return list_of_gifs
+
 
 # https://github.com/StewPoll/safygiphy
 # https://developers.giphy.com/docs/
