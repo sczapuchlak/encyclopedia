@@ -2,6 +2,7 @@
 from twitter import Twitter, OAuth
 from os import environ
 from config import keys
+import wikipedia
 
 class Requestor():
     '''General HTTP Requestor'''
@@ -57,6 +58,10 @@ class Requestor():
         #return list_of_tweets
 
         return query
+
+
+
+
 
 # Testing that everything works as expected...
 # requestor = Requestor()

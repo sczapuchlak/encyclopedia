@@ -197,7 +197,7 @@ def test():
     results = requestor.search_twitter(testString)
 
     # term = request.form.get('term', None)
-    # results = requestor.search_twitter(testString)
+    # results = requestor.search_twitter(term)
 
     templateData = {
 

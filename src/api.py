@@ -1,8 +1,10 @@
 from twitter import Twitter, OAuth
 import safygiphy
 from os import environ
+import wikipedia
 
-def Requestor():
+
+class Requestor:
 
     def __init__(self):
         '''All API Credentials (Twitter, Giphy, Flickr)'''
@@ -30,7 +32,6 @@ def Requestor():
 
         return query
 
-
     def search_giphy(self, word):
         '''search for gifs on giphy'''
         '''
@@ -43,7 +44,7 @@ def Requestor():
             change line 67 to read:
             list_of_gifs.append(results)
             -----------------------------------------------------------------------
-            Refrences:
+            References:
             https://github.com/StewPoll/safygiphy
             https://developers.giphy.com/docs/
             -----------------------------------------------------------------------
@@ -67,3 +68,10 @@ def Requestor():
             list_of_gifs.append(embed_gifs)
 
         return list_of_gifs
+
+    def search_wiki(self, word):
+
+        # Searches Wikipedia for word and returns summary of that page
+        summary = wikipedia.summary(word)
+
+        return summary
