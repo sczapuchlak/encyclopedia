@@ -174,5 +174,39 @@ def sign_user_out():
 def favicon():
     Logger.log('')
     return send_from_directory(path.join(app.root_path, 'static', 'images'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+'''
+
+This is an example of tweets displayed.
+I am not good at css/html so please make changes needed/put code where it goes 
+- I didn't want to break front end stuff you've done
+
+
+Uses/Found here:
+- static/css/main.css
+- templates/layouts/layout1.html
+- twitterexample.html
+
+'''
+
+
+@app.route('/test')
+def test():
+    requestor = Requestor()
+    testString = "cat"
+    results = requestor.search_twitter(testString)
+
+    # term = request.form.get('term', None)
+    # results = requestor.search_twitter(testString)
+
+    templateData = {
+
+        'tweets': results.get('statuses')
+    }
+
+    return render_template('twitterexample.html', **templateData)
+
+
+
 if __name__ == '__main__':
     app.run()
