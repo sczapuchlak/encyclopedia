@@ -82,9 +82,11 @@ class Requestor:
         # Searches Wikipedia for word and returns summary of that page
         try:
             summary = wikipedia.summary(word)
-            
+
         except wikipedia.exceptions.DisambiguationError as e:
             print(e.options)
             summary = ['Unable to find info on {w}'.format(w=word),'did you mean one of these?']
             summary.extend(e.options)
+        except wikipedia.exceptions.WikipediaException as e:
+            summary = ['Unable to find info on {w}'.format(w=word)]
         return summary
