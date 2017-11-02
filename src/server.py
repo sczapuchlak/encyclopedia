@@ -1,8 +1,6 @@
 '''main entrypoint for the application'''
 import time
 from os import environ, path
-from src.twitterAPI import Requestor
-from src.giphyAPI import Giphy
 from src.login import UserManager
 from src.logger import Logger
 from flask import Flask, render_template, request, session, redirect, send_from_directory, jsonify
