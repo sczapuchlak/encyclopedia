@@ -2,7 +2,7 @@
 import bcrypt
 from src.database import Database
 from src.user import User
-
+from src.userSearch import UserSearch
 class UserManager():
     '''Manager the user's of this application'''
     def __init__(self):
@@ -34,6 +34,13 @@ class UserManager():
     def get_user_profile(self, username):
         user = self.database.get_user(username)
         return user
-
+    def add_search(self, username, term, services):
+        if username is None or\
+        services is None or\
+        term is None or\
+        len(services) < 1:
+            return
+        user = self.database.get_user(username)
+        self.database.add_search(UserSearch(None, term, services, user.user_id ))
     def _hash_password(self, password):
         return bcrypt.hashpw(password, bcrypt.gensalt())

@@ -5,6 +5,13 @@ from src.userSearch import UserSearch
 from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, create_engine
 import sqlalchemy.types as types
 from sqlalchemy.orm import mapper, sessionmaker, relationship
+from os import environ
+
+# this will resolve a connection string from the environment variale
+# for example in production we have a postgres db while in test
+# or dev we want to use sqlite this value will still be overwritten
+#if the caller sends their own conn string in the constructor
+conn_str = environ.get('DATABASE_URL', 'sqlite:///media.cheetah.sqlite3')
 #database class
 class Database():
     '''Data Access Layer'''

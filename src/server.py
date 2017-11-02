@@ -50,6 +50,7 @@ def search():
     'Route to search'
     term = request.form.get('term', None)
     services = request.form.getlist('services', None)
+    USER_MANAGER.add_search(session['username'], term, services)
     requestor = Requestor()
     results = Result()
     if 'Twitter' in services:
