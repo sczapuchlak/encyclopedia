@@ -11,7 +11,7 @@ from os import environ
 # for example in production we have a postgres db while in test
 # or dev we want to use sqlite this value will still be overwritten
 #if the caller sends their own conn string in the constructor
-conn_str = environ.get('ENC_CONN_STR', 'sqlite:///media.cheetah.sqlite3')
+conn_str = environ.get('DATABASE_URL', 'sqlite:///media.cheetah.sqlite3')
 
 #database class
 class Database():
