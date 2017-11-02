@@ -3,6 +3,7 @@ import time
 from os import environ, path
 from src.login import UserManager
 from src.logger import Logger
+
 from flask import Flask, render_template, request, session, redirect, send_from_directory, jsonify
 app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'

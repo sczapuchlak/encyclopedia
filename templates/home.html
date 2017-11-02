@@ -116,9 +116,32 @@ label{
 
         <div class="results">
             <ul>
-                {% for result in results %}
-                <li><span>{{result.text}}</span><br/></li>
-                {% endfor %}
+                {% if len(results.tweets) > 0%}
+                    {% for t in results.tweets %}
+                    <li>
+                    <blockquote class="twitter-tweet">
+                        <p>
+                            {{ t.text }}
+                            <br>
+                            <strong>@{{ t.user.screen_name }}</strong>
+                            | <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
+                            <br>
+                            {{t.created_at}}
+        
+                            {% if t.entities.urls%}
+                            <br>
+                            <i>tweet links</i>
+                            <ol>
+                                {% for url in t.entities.urls %}
+                                <li><a href="{{url.expanded_url}}">{{url.expanded_url}}</a></li>
+                                {% endfor %}
+                            </ol>
+                            {% endif %}
+                        </p>
+                    </blockquote>
+                    </li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
     <br/><br/><br/>
