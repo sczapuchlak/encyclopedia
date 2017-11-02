@@ -5,10 +5,16 @@ from src.userSearch import UserSearch
 from sqlalchemy import Table, MetaData, Column, Integer, String, ForeignKey, create_engine
 import sqlalchemy.types as types
 from sqlalchemy.orm import mapper, sessionmaker, relationship
+from os import environ
+
+conn_str = environ.get('ENC_CONN_STR', 'sqlite:///media.cheetah.sqlite3')
+
+
+
 #database class
 class Database():
     '''Data Access Layer'''
-    def __init__(self, connection_string='sqlite:///media.cheetah.sqlite3'):
+    def __init__(self, connection_string=conn_str):
         self.sql_file = connection_string
         self.engine = self._get_connection()
         self.metadata = MetaData(bind=self.engine)
