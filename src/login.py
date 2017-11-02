@@ -32,9 +32,11 @@ class UserManager():
         user_hash = bcrypt.hashpw(password, db_hash)
         return user_hash == db_hash
     def get_user_profile(self, username):
+        '''get the user info from the db'''
         user = self.database.get_user(username)
         return user
     def add_search(self, username, term, services):
+        '''add a search to the user's profile'''
         if username is None or\
         services is None or\
         term is None or\

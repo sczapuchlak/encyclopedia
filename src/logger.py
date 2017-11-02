@@ -1,7 +1,9 @@
+'''for logging with execution context info'''
 import inspect
 from os import environ
 
 class Logger:
+    '''Static class for logging'''
     def log(message):
         '''Print a message with location information'''
         if environ.get('env') != 'PROD':

@@ -5,19 +5,15 @@ import wikipedia
 
 
 class Result:
+    '''The response to a search request'''
     def __init__(self):
         self.tweets = list()
         self.gifs = list()
         self.articles = list()
-    def __repr__(self):
-        return 'tweets:\n{tw}\n\ngifs:\n{gf}\n\narticles:\n{ar}'\
-        .format(tw=self.tweets, gf=self.gifs, ar=self.articles)
-
+        
 class Requestor:
-
+    '''All API Credentials (Twitter, Giphy, Flickr)'''
     def __init__(self):
-        '''All API Credentials (Twitter, Giphy, Flickr)'''
-
         '''Load Twitter API Credentials'''
         self.oauth = OAuth(environ.get('twitter_access_key'),\
         environ.get('twitter_access_secret'), environ.get('twitter_consumer_key'),\
@@ -67,7 +63,8 @@ class Requestor:
 
         # Prefix/Suffix to Embed the results
         prefix = """<iframe src="https://giphy.com/embed/"""
-        suffix = """" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>"""
+        suffix = """" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen>
+        </iframe>"""
         # Produce collection of 10 iframes containing gifs @ random by search word
         for i in range(10):
             results = giphy.random(tag=word)["data"]["id"]
@@ -78,15 +75,13 @@ class Requestor:
         return list_of_gifs
 
     def search_wiki(self, word):
-
-        # Searches Wikipedia for word and returns summary of that page
+        '''Searches Wikipedia for word and returns summary of that page'''
         try:
             summary = wikipedia.summary(word)
-
-        except wikipedia.exceptions.DisambiguationError as e:
+        except wikipedia.exceptions.DisambiguationError as err:
             print(e.options)
             summary = ['Unable to find info on {w}'.format(w=word),'did you mean one of these?']
-            summary.extend(e.options)
-        except wikipedia.exceptions.WikipediaException as e:
+            summary.extend(err.options)
+        except wikipedia.exceptions.WikipediaException:
             summary = ['Unable to find info on {w}'.format(w=word)]
         return summary
