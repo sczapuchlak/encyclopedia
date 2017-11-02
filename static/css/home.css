@@ -38,11 +38,12 @@ input[type=text]:focus {
 
 .search-suggestion {
   height: 50px;
-}
-
-.search-suggestion:hover {
-  background: dodgerblue;
-  color: white;
   display: block;
   width: 100%;
+}
+
+.search-suggestion:hover,
+.search-suggestion:focus {
+  background: dodgerblue;
+  color: white;
 }

@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="static/scripts/home.js"></script>
+    <script type="text/javascript" src="static/scripts/predict.js"></script>
 
     <style>
         #term {
@@ -68,12 +68,11 @@
             checkboxes = document.getElementsByName('services');
             let i = 0,
                 n = checkboxes.length;
+
             for (; i < n; i++) {
                 checkboxes[i].checked = source.checked;
             }
         }
-        const cheetahMeow = new Audio();
-        cheetahMeow.src = url("http://www.kessels.com/CatSounds/lion3.wav");
     </script>
 </head>
 
@@ -89,7 +88,8 @@
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
                 <h4>Example: cat</h4>
                 <br/>
-                <form autocomplete="on" action="/search" method="post">
+
+                <form autocomplete="off" action="/search" method="post">
                     <input type="text" style="font-size: 125%" name="term" id="term" placeholder="search..." autofocus />
                     <div id="predictive" class="hidden">
                     </div>
