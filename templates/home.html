@@ -66,14 +66,13 @@
     <script>
         function toggle(source) {
             checkboxes = document.getElementsByName('services');
-            let i = 0, n = checkboxes.length;
+            let i = 0,
+                n = checkboxes.length;
+
             for (; i < n; i++) {
                 checkboxes[i].checked = source.checked;
             }
         }
-
-
-
     </script>
 </head>
 
@@ -89,6 +88,7 @@
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
                 <h4>Example: cat</h4>
                 <br/>
+
                 <form autocomplete="off" action="/search" method="post">
                     <input type="text" style="font-size: 125%" name="term" id="term" placeholder="search..." autofocus />
                     <div id="predictive" class="hidden">
@@ -106,7 +106,7 @@
                     <br />
                     <br />
                     <label>
-                        <input class="checkbox" type="checkbox" name="services" value="Flickr" />Flickr</label>
+                        <input class="checkbox" type="checkbox" name="services" value="Wikipedia" />Wikipedia</label>
                     <br />
                     <h2>OR</h2>
                     <label>
@@ -128,13 +128,43 @@
 
         <div class="results">
             <ul>
-                {% for result in results %}
+                {% if results.tweets %}
+                <h2>Tweets</h2>
+                {% for t in results.tweets %}
                 <li>
-                    <span>{{result.text}}</span>
-                    <br/>
+                    <blockquote class="twitter-tweet">
+                        <p>
+                            {{ t.text }}
+                            <br>
+                            <strong>@{{ t.user.screen_name }}</strong>
+                            |
+                            <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
+                            <br> {{t.created_at}} {% if t.entities.urls%}
+                            <br>
+                            <i>tweet links</i>
+                            <ol>
+                                {% for url in t.entities.urls %}
+                                <li>
+                                    <a href="{{url.expanded_url}}">{{url.expanded_url}}</a>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                            {% endif %}
+                        </p>
+                    </blockquote>
                 </li>
-                {% endfor %}
+                {% endfor %} {% endif %}
             </ul>
+        </div>
+        <div>
+            {% if results.gifs %}
+            <h2>GIFs</h2>
+            {% for gif in results.gifs%} {{gif|safe}} {% endfor %} {% endif %}
+        </div>
+        <div>
+            {% if results.articles %}
+            <h2>Article</h2>
+            {% for a in results.articles %} {{a}} {% endfor %} {% endif %}
         </div>
         <br/>
         <br/>
