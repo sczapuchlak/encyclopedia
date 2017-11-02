@@ -1,6 +1,7 @@
+'''HTTP Request Service'''
+from os import environ
 from twitter import Twitter, OAuth
 import safygiphy
-from os import environ
 import wikipedia
 
 
@@ -10,7 +11,7 @@ class Result:
         self.tweets = list()
         self.gifs = list()
         self.articles = list()
-        
+
 class Requestor:
     '''All API Credentials (Twitter, Giphy, Flickr)'''
     def __init__(self):
@@ -43,7 +44,7 @@ class Requestor:
             Make outbound request to Giphy & perform a basic search
 
             - Returns list of 10 iframes containing gifs (to embed gif)
-            
+
             NOTE: If you want the Gif ID returned instead of iframe,
             change line 67 to read:
             list_of_gifs.append(results)
@@ -66,7 +67,7 @@ class Requestor:
         suffix = """" width="360" height="480" frameBorder="0" class="giphy-embed" allowFullScreen>
         </iframe>"""
         # Produce collection of 10 iframes containing gifs @ random by search word
-        for i in range(10):
+        for _ in range(10):
             results = giphy.random(tag=word)["data"]["id"]
             embed_gifs = prefix + results + suffix
             # print(embed_gifs) this was to make sure correct syntax
@@ -79,8 +80,7 @@ class Requestor:
         try:
             summary = wikipedia.summary(word)
         except wikipedia.exceptions.DisambiguationError as err:
-            print(e.options)
-            summary = ['Unable to find info on {w}'.format(w=word),'did you mean one of these?']
+            summary = ['Unable to find info on {w}'.format(w=word), 'did you mean one of these?']
             summary.extend(err.options)
         except wikipedia.exceptions.WikipediaException:
             summary = ['Unable to find info on {w}'.format(w=word)]

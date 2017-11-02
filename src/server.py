@@ -32,7 +32,7 @@ def auth():
     # if the request is a post
     if request.method == 'POST':
         Logger.log('POST')
-        # try and get the info entered 
+        # try and get the info entered
         username = request.form.get('username', None)
         password = request.form.get('password', None)
         # check if the user exists and the password matches
@@ -101,14 +101,13 @@ def sign_up():
             USER_MANAGER.add_user(first_name, last_name, username, password, email)
             sign_user_in(username)
             Logger.log('user created')
-        except RuntimeError:
+        except RuntimeError as err:
             Logger.log('failed to create user')
-            return render_template('signup.html', error_text=e.args[0])
+            return render_template('signup.html', error_text=err.args[0])
         Logger.log('redirecting to home')
         return redirect('home.html')
-    else:
-        Logger.log('sending signup')
-        return render_template('signup.html')
+    Logger.log('sending signup')
+    return render_template('signup.html')
 @app.route('/searches', methods=['get'])
 def searches():
     '''get the search history for this user'''
@@ -117,9 +116,9 @@ def searches():
         Logger.log(username)
         user = USER_MANAGER.get_user_profile(username)
         Logger.log(user.searches)
-        return jsonify(searches=list(map(lambda s: s.search_text,user.searches)))
+        return jsonify(searches=list(map(lambda s: s.search_text, user.searches)))
     return jsonify(searches=list())
-@app.route('/profile.html', methods=['get','post'])
+@app.route('/profile.html', methods=['get', 'post'])
 def profile():
     '''get the user profile'''
     if request.method == 'GET':
@@ -162,11 +161,10 @@ def check_for_user():
             #remove the user from the session
             sign_user_out()
             return False
-        else:
-            Logger.log('current is less than expiration, refreshing')
-            #refresh the expiration to be 30 minutes from now
-            add_expiration()
-            return True
+        Logger.log('current is less than expiration, refreshing')
+        #refresh the expiration to be 30 minutes from now
+        add_expiration()
+        return True
     except KeyError:
         Logger.log('No username in session')
         #if the username or expiration is not in the session
