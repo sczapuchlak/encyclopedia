@@ -4,6 +4,15 @@ from os import environ
 import wikipedia
 
 
+class Result:
+    def __init__(self):
+        self.tweets = list()
+        self.gifs = list()
+        self.articles = list()
+    def __repr__(self):
+        return 'tweets:\n{tw}\n\ngifs:\n{gf}\n\narticles:\n{ar}'\
+        .format(tw=self.tweets, gf=self.gifs, ar=self.articles)
+
 class Requestor:
 
     def __init__(self):
@@ -29,8 +38,7 @@ class Requestor:
         -----------------------------------------------------------------------
         Search tweets for 'word' and return 10'''
         query = self.twitter.search.tweets(q=word, count=10)
-
-        return query
+        return query['statuses']
 
     def search_giphy(self, word):
         '''search for gifs on giphy'''
@@ -72,6 +80,11 @@ class Requestor:
     def search_wiki(self, word):
 
         # Searches Wikipedia for word and returns summary of that page
-        summary = wikipedia.summary(word)
-
+        try:
+            summary = wikipedia.summary(word)
+            
+        except wikipedia.exceptions.DisambiguationError as e:
+            print(e.options)
+            summary = ['Unable to find info on {w}'.format(w=word),'did you mean one of these?']
+            summary.extend(e.options)
         return summary

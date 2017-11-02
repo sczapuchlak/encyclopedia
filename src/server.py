@@ -3,7 +3,7 @@ import time
 from os import environ, path
 from src.login import UserManager
 from src.logger import Logger
-
+from src.api import Requestor, Result
 from flask import Flask, render_template, request, session, redirect, send_from_directory, jsonify
 app = Flask(__name__, '/static', static_folder='../static', template_folder='../templates')
 app.secret_key = 'rubber baby buggy bumbers'
@@ -51,16 +51,17 @@ def search():
     term = request.form.get('term', None)
     services = request.form.getlist('services', None)
     requestor = Requestor()
-    results = list()
+    results = Result()
     if 'Twitter' in services:
         Logger.log('Twitter')
-        results.extend(requestor.search_twitter(term))
-        Logger.log(results)
+        results.tweets = requestor.search_twitter(term)
     if 'Giphy' in services:
         Logger.log('Giphy')
-        g = Giphy()
-        results.extend(g.search_giphy(term))
-    Logger.log('returning list of results %s' % results)
+        results.gifs = requestor.search_giphy(term)
+    if 'Wikipedia' in services:
+        Logger.log('Wikipedia')
+        results.articles = requestor.search_wiki(term)
+    Logger.log('returning dict of results %s' % results)
     return render_template('home.html', results=results)
 @app.route('/home')
 @app.route('/home.html')

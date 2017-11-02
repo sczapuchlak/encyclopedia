@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:http="http://www.w3.org/1999/xhtml" xmlns:https="http://www.w3.org/1999/xhtml">
+
 <head>
     <base href="/" />
     <!---We can change the title of the site later... just needed something for the time being!-->
@@ -12,68 +13,70 @@
 
     <script type="text/javascript" src="static/scripts/home.js"></script>
 
-<style>
-  #term {
-  font-size: 18pt;
-  padding: 5px;
-  font-family: sans-serif;
-  width: 250px;
-}
+    <style>
+        #term {
+            font-size: 18pt;
+            padding: 5px;
+            font-family: sans-serif;
+            width: 250px;
+        }
 
-#predictive {
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: 1px solid black;
-  width: 250px;
-  padding: 5px;
-}
+        #predictive {
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border: 1px solid black;
+            width: 250px;
+            padding: 5px;
+        }
 
-#predictive.hidden {
-  display: none;
-}
+        #predictive.hidden {
+            display: none;
+        }
 
-.search-suggestion {
-  height: 50px;
-}
+        .search-suggestion {
+            height: 50px;
+        }
 
-.search-suggestion:hover {
-  background: dodgerblue;
-  color: white;
-  display: block;
-  width: 100%;
-}
-input[type="checkbox"] {
-    display: inline-block;
-    width: 15px;
-    vertical-align: top;
-}
+        .search-suggestion:hover {
+            background: dodgerblue;
+            color: white;
+            display: block;
+            width: 100%;
+        }
 
-.label-text {
-  display: inline-block;
-    font-size: 40pt;
-  width: 200px;
-  word-break: break-all;
-}
-label{
-    font-size: 125%
-}
+        input[type="checkbox"] {
+            display: inline-block;
+            width: 15px;
+            vertical-align: top;
+        }
 
-</style>
-<script>
-    function toggle(source) {
-  checkboxes = document.getElementsByName('services');
-        let i = 0, n = checkboxes.length;
-        for(; i<n; i++) {
-    checkboxes[i].checked = source.checked;
-        }}
-  const cheetahMeow = new Audio();
-    cheetahMeow.src = url("http://www.kessels.com/CatSounds/lion3.wav");
+        .label-text {
+            display: inline-block;
+            font-size: 40pt;
+            width: 200px;
+            word-break: break-all;
+        }
 
-
-</script>
+        label {
+            font-size: 125%
+        }
+    </style>
+    <script>
+        function toggle(source) {
+            checkboxes = document.getElementsByName('services');
+            let i = 0,
+                n = checkboxes.length;
+            for (; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+        const cheetahMeow = new Audio();
+        cheetahMeow.src = url("http://www.kessels.com/CatSounds/lion3.wav");
+    </script>
 </head>
+
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
     <div class="container">
@@ -84,23 +87,32 @@ label{
         <div class=" row aboutTheCompany" style=" border: 1px solid grey;">
             <div class="col-lg-6">
                 <h3 align="left" style="color: black;padding-bottom: 30px;padding-top: 30px; font-size: 24pt" ;> Please enter a search keyword:</h3>
-                <h4>Example: cat</h4><br/>
+                <h4>Example: cat</h4>
+                <br/>
                 <form autocomplete="on" action="/search" method="post">
                     <input type="text" style="font-size: 125%" name="term" id="term" placeholder="search..." autofocus />
-                  <div id="predictive" class="hidden">
-                  </div>
+                    <div id="predictive" class="hidden">
+                    </div>
 
-                   <br /><br />
-                    <label >
-                       <input class="checkbox" type="checkbox" name="services" value="Twitter"/>
-                    Twitter</label><br /><br />
+                    <br />
+                    <br />
                     <label>
-                        <input class="checkbox" type="checkbox" name="services" value="Giphy"/>Giphy</label><br /><br />
+                        <input class="checkbox" type="checkbox" name="services" value="Twitter" /> Twitter
+                    </label>
+                    <br />
+                    <br />
                     <label>
-                        <input class="checkbox" type="checkbox" name="services" value="Flickr"/>Flickr</label><br />
+                        <input class="checkbox" type="checkbox" name="services" value="Giphy" />Giphy</label>
+                    <br />
+                    <br />
+                    <label>
+                        <input class="checkbox" type="checkbox" name="services" value="Wikipedia" />Wikipedia</label>
+                    <br />
                     <h2>OR</h2>
                     <label>
-                    <input class="checkbox" type="checkbox" name="services" value="SelectAll" onClick="toggle(this)"/>Select All Services</label><br /><br />
+                        <input class="checkbox" type="checkbox" name="services" value="SelectAll" onClick="toggle(this)" />Select All Services</label>
+                    <br />
+                    <br />
                     <button class="button" style="height: 50px; width: 140px;font-size: 125%" onmousedown="cheetahMeow.play();">Search</button>
                 </form>
             </div>
@@ -116,43 +128,55 @@ label{
 
         <div class="results">
             <ul>
-                {% if len(results.tweets) > 0%}
-                    {% for t in results.tweets %}
-                    <li>
+                {% if results.tweets %}
+                <h2>Tweets</h2>
+                {% for t in results.tweets %}
+                <li>
                     <blockquote class="twitter-tweet">
                         <p>
                             {{ t.text }}
                             <br>
                             <strong>@{{ t.user.screen_name }}</strong>
-                            | <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
-                            <br>
-                            {{t.created_at}}
-        
-                            {% if t.entities.urls%}
+                            |
+                            <a href="https://www.twitter.com/{{t.user.screen_name}}/status/{{t.id}}">link</a>
+                            <br> {{t.created_at}} {% if t.entities.urls%}
                             <br>
                             <i>tweet links</i>
                             <ol>
                                 {% for url in t.entities.urls %}
-                                <li><a href="{{url.expanded_url}}">{{url.expanded_url}}</a></li>
+                                <li>
+                                    <a href="{{url.expanded_url}}">{{url.expanded_url}}</a>
+                                </li>
                                 {% endfor %}
                             </ol>
                             {% endif %}
                         </p>
                     </blockquote>
-                    </li>
-                    {% endfor %}
-                {% endif %}
+                </li>
+                {% endfor %} {% endif %}
             </ul>
         </div>
-    <br/><br/><br/>
-    <div style="padding-left: 130px">
+        <div>
+            {% if results.gifs %}
+            <h2>GIFs</h2>
+            {% for gif in results.gifs%} {{gif|safe}} {% endfor %} {% endif %}
+        </div>
+        <div>
+            {% if results.articles %}
+            <h2>Article</h2>
+            {% for a in results.articles %} {{a}} {% endfor %} {% endif %}
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div style="padding-left: 130px">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Diamond-caution.svg/600px-Diamond-caution.svg.png" align="left"
                 alt="Social Media" style="width:50px;height: 50px;">
             <h3 style="color: #2c6496;font-size: 18pt; padding-left: 80px; "> Please be patient.</h3>
             <p style="padding-left: 80px; padding-top: 5px"> Every day, we are constantly upgrading and adding more social networks to search through.
             </p>
         </div>
-       {% include "footer.html" %}
+        {% include "footer.html" %}
     </div>
 
 </body>
