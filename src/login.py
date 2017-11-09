@@ -3,6 +3,7 @@ import bcrypt
 from src.database import Database
 from src.user import User
 from src.userSearch import UserSearch
+from src.logger import Logger
 class UserManager():
     '''Manager the user's of this application'''
     def __init__(self):
@@ -43,6 +44,9 @@ class UserManager():
         len(services) < 1:
             return
         user = self.database.get_user(username)
-        self.database.add_search(UserSearch(None, term, services, user.user_id ))
+        if term in list(map(lambda s: s.search_text, user.searches)):
+            Logger.log('term already used, not saving')
+        else:
+            self.database.add_search(UserSearch(None, term, services, user.user_id ))
     def _hash_password(self, password):
         return bcrypt.hashpw(password, bcrypt.gensalt())

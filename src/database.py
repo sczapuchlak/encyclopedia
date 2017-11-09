@@ -44,6 +44,7 @@ class Database():
     def add_search(self, search):
         '''add a search to the user's profile'''
         session = self._get_session()
+        
         session.add(search)
         session.commit()
     def get_searches_for_user(self, user_id):

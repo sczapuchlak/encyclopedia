@@ -15,11 +15,20 @@ input[type=text] {
 input[type=text]:focus {
     width: 100%;
 }
-  #term {
+.checkbox {
+  z-index: 0;
+}
+
+#term {
   font-size: 16t;
   padding: 5px;
   font-family: sans-serif;
   width: 250px;
+}
+
+#predictive-container {
+  position: relative;
+  overflow: visible;
 }
 
 #predictive {
@@ -30,8 +39,16 @@ input[type=text]:focus {
   border: 1px solid black;
   width: 250px;
   padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
 }
+#predictive,
+#predictive > * {
+  z-index: 100;
 
+}
 #predictive.hidden {
   display: none;
 }

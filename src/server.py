@@ -52,13 +52,19 @@ def auth():
             return redirect('home.html')
         Logger.log('User is not logged in, sending to login page')
         return render_template('login.html')
-@app.route('/search', methods=['post'])
+@app.route('/search', methods=['get', 'post'])
 def search():
     'Route to search'
-    # try and get the term
-    term = request.form.get('term', None)
-    # try and get the selected services as a list
-    services = request.form.getlist('services', None)
+    if request.method == 'GET':
+        term = request.args.get('term')
+        services_string = request.args.get('services')
+        services = services_string.split(',')
+        Logger.log(services)
+    else:
+        # try and get the term
+        term = request.form.get('term', None)
+        # try and get the selected services as a list
+        services = request.form.getlist('services', None)
     # add the search to the user's profile
     USER_MANAGER.add_search(session['username'], term, services)
     # initialize the api service
@@ -66,13 +72,13 @@ def search():
     # create a blank result
     results = Result()
     # check for each of the available selected service
-    if 'Twitter' in services:
+    if 'Twitter' in services or 'twitter' in services:
         Logger.log('Twitter')
         results.tweets = requestor.search_twitter(term)
-    if 'Giphy' in services:
+    if 'Giphy' in services or 'giphy' in services:
         Logger.log('Giphy')
         results.gifs = requestor.search_giphy(term)
-    if 'Wikipedia' in services:
+    if 'Wikipedia' in services or 'wikipedia' in services:
         Logger.log('Wikipedia')
         results.articles = requestor.search_wiki(term)
     Logger.log('returning dict of results %s' % results)
