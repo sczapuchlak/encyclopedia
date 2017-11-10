@@ -1,3 +1,4 @@
+{% import "profile_row.html" as row %}
 <!DOCTYPE html>
 <html lang="en" xmlns:http="http://www.w3.org/1999/xhtml" xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,12 +10,6 @@
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
     <link href="static/css/profile.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
-
-    <script>
-
-</script>
-
 </head>
 <body style="padding-top:5pt;text-shadow: 2px 1px 2px rgba(150, 150, 150, 0);color: darkslateblue; font-family: 'Raleway', sans-serif; font-weight: 600;
                         font-size: 13pt">
@@ -26,24 +21,53 @@
             background: linear-gradient(to right, #1a2980, #26d0ce); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */; padding-top: 13%;
             text-shadow: 2px 1px 2px rgba(150, 150, 150, 1);color: whitesmoke">
             <h1>
-                <center style="font-weight:300; font-size: 38pt;height: 30pt;"> Your last five searches conveniently located in one place...</center>
+                    Your last five searches conveniently located in one place...
             </h1>
             </br>
             </br>
             </br>
             <h3>
-                <center> If you want to re search for something, click on it again! </center>
+                If you want to re search for something, click on it again!
             </h3>
         </div>
 
          <div class=" row searches">
             <div class="col-lg-12">
                 <h3 style="color: black;padding-bottom: 30px;padding-left: 35px; font-size: 24pt">
-                    <center> You've Searched...</center>
+                    You've Searched...
                 </h3>
-
             </div>
-
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td class="term-header">
+                            Term
+                        </td>
+                        <td class="twitter-header service-mark">
+                            Twitter
+                        </td>
+                        <td class="giphy-header service-mark">
+                            Giphy
+                        </td>
+                        <td class="wiki-header service-mark">
+                            Wikipedia
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for search in user.searches %}
+                    {{ row.row(search.search_text, search.services) }}
+                    {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center;">
+                            No history...
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         {% include "footer.html" %}
     </div>

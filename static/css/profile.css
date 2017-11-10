@@ -1,0 +1,29 @@
+h1,
+h3 {
+    display: block;
+    margin: 2px auto;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 5px auto;
+}
+
+td {
+    border: 1px solid dodgerblue;
+    padding: 2px 5px;
+}
+
+.term-header {
+    width: 250px;
+}
+
+.twitter-header,
+.giphy-header,
+.wiki-header {
+    width: 100px;
+}
+
+.service-mark {
+    text-align: center;
+}

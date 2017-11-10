@@ -1,0 +1,20 @@
+{% macro row(term, services) -%}
+    <tr>
+        <td>
+            <a href="/search?term={{term|urlencode}}&services={{services|join(',')}}'">
+                {{term}}
+            </a>
+        </td>
+        {{ service_cell('twitter', services) }}
+        {{ service_cell('giphy', services) }}
+        {{ service_cell('wikipedia', services) }}
+    </tr>
+{%- endmacro %}
+
+{% macro service_cell(name, services) -%}
+    {% if name in services %}
+    <td class="service-mark">X</td>
+    {% else %}
+    <td></td>
+    {% endif %}
+{%- endmacro %}
