@@ -164,9 +164,8 @@
             {% for gif in results.gifs%} {{gif|safe}} {% endfor %} {% endif %}
         </div>
         <div>
-            {% if results.articles %}
             <h2>Article</h2>
-            {% for a in results.articles %} {{a}} {% endfor %} {% endif %}
+            {{ results.articles }}
         </div>
         <br/>
         <br/>
