@@ -11,7 +11,7 @@ python-bcrypt==0.3.2
 requests==2.18.4
 safygiphy==1.1.0
 twitter==1.17.1
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.12.2
 certifi==2017.7.27.1
 chardet==3.0.4
@@ -27,6 +27,6 @@ requests==2.18.4
 safygiphy==1.1.0
 SQLAlchemy==1.1.14
 twitter==1.17.1
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.12.2
 wikipedia==1.4.0
